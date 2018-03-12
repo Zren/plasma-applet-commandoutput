@@ -10,3 +10,7 @@
 
 * Fix configuring intervals other than 1 second. Thanks @sheerhub
 * Use the utilities-terminal icon
+
+## v1 - December 26 2016
+
+* First release
