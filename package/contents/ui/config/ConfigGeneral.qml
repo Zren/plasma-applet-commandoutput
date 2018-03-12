@@ -7,6 +7,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ConfigPage {
 	id: page
+	showAppletVersion: true
 	
 	property alias cfg_command: command.text
 	property alias cfg_waitForCompletion: waitForCompletion.checked
