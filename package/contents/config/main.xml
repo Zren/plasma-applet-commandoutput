@@ -19,7 +19,7 @@
       <default>16</default>
     </entry>
     <entry name="fontFamily" type="string">
-      <default>DejaVu Sans</default>
+      <default></default>
     </entry>
   </group>
 
