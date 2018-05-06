@@ -42,4 +42,22 @@ ConfigPage {
 			enabled: false
 		}
 	}
+
+	ConfigSection {
+		label: i18n("Font")
+
+		ConfigFontFamily {
+			configKey: 'fontFamily'
+			before: i18n("Font Family:")
+		}
+		ConfigSpinBox {
+			configKey: 'fontSize'
+			before: i18n("Font Size:")
+			suffix: i18n("px")
+		}
+		ConfigCheckBox {
+			configKey: 'bold'
+			text: i18n("Bold")
+		}
+	}
 }

@@ -15,6 +15,12 @@
     <entry name="waitForCompletion" type="bool">
       <default>true</default>
     </entry>
+    <entry name="fontSize" type="int">
+      <default>16</default>
+    </entry>
+    <entry name="fontFamily" type="string">
+      <default>DejaVu Sans</default>
+    </entry>
   </group>
 
 </kcfg>

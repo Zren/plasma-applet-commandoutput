@@ -82,7 +82,9 @@ Item {
 			color: theme.textColor
 
 			font.pointSize: -1
-			font.pixelSize: 16 * units.devicePixelRatio
+			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
+			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
+			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			fontSizeMode: Text.Fit
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
