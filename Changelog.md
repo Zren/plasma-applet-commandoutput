@@ -1,3 +1,8 @@
+## v5 - May 6 2018
+
+* Support use as a Desktop Widget.
+* Add ability to change the font family, size, and boldness.
+
 ## v4 - March 12 2018
 
 * Run command on load so in case the interval is very long.
