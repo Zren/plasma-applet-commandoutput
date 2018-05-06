@@ -68,7 +68,7 @@ Item {
 	Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 	Plasmoid.fullRepresentation: Item {
 		id: panelItem
-		// Layout.minimumWidth: output.implicitWidth
+		Layout.minimumWidth: output.implicitWidth
 		Layout.preferredWidth: output.implicitWidth
 		// Layout.maximumWidth: output.width
 		// Layout.preferredHeight: output.implicitHeight
