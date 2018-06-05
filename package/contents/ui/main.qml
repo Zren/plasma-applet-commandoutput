@@ -34,15 +34,18 @@ Item {
 		id: config
 		property bool active: !!command
 		property bool waitForCompletion: plasmoid.configuration.waitForCompletion
+		property bool tooltipRichText: plasmoid.configuration.tooltipRichText
 		property int interval: Math.max(1000, plasmoid.configuration.interval)
 		property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
 	}
 
 	property string outputText: ''
+	property string tooltipText: ''
 	Connections {
 		target: executable
 		onExited: {
 			widget.outputText = stdout.replace('\n', ' ').trim()
+			widget.tooltipText = stderr;
 			if (config.waitForCompletion) {
 				timer.restart()
 			}
@@ -89,6 +92,15 @@ Item {
 			horizontalAlignment: Text.AlignHCenter
 			verticalAlignment: Text.AlignVCenter
 		}
+
+		PlasmaCore.ToolTipArea {
+			anchors.fill: parent
+			icon: 'utilities-terminal'
+			mainText: widget.outputText
+			subText: widget.tooltipText
+			textFormat: config.tooltipRichText ? Text.RichText : Text.PlainText
+		}
+
 	}
 
 }
