@@ -85,6 +85,8 @@ Item {
 			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
 			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
+			font.italic: plasmoid.configuration.italic
+			font.underline: plasmoid.configuration.underline
 			fontSizeMode: Text.Fit
 			horizontalAlignment: plasmoid.configuration.textAlign
 			verticalAlignment: Text.AlignVCenter

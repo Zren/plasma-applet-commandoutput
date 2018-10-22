@@ -55,9 +55,11 @@ ConfigPage {
 			before: i18n("Font Size:")
 			suffix: i18n("px")
 		}
-		ConfigCheckBox {
-			configKey: 'bold'
-			text: i18n("Bold")
+		ConfigTextFormat {
+			boldConfigKey: 'bold'
+			italicConfigKey: 'italic'
+			underlineConfigKey: 'underline'
+			alignConfigKey: 'textAlign'
 		}
 	}
 }

@@ -21,6 +21,15 @@
     <entry name="fontFamily" type="string">
       <default></default>
     </entry>
+    <entry name="bold" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="italic" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="underline" type="bool">
+      <default>false</default>
+    </entry>
     <entry name="textAlign" type="int">
       <!-- Text.AlignLeft: 1 -->
       <!-- Text.AlignHCenter: 4 -->
