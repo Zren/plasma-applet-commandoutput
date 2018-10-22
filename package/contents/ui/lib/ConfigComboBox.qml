@@ -102,7 +102,7 @@ RowLayout {
 	}
 
 	function selectValue(val) {
-		var index = comboBox.findValue(val)
+		var index = findValue(val)
 		if (index >= 0) {
 			comboBox.currentIndex = index
 		}
