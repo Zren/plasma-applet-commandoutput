@@ -21,6 +21,13 @@
     <entry name="fontFamily" type="string">
       <default></default>
     </entry>
+    <entry name="textAlign" type="int">
+      <!-- Text.AlignLeft: 1 -->
+      <!-- Text.AlignHCenter: 4 -->
+      <!-- Text.AlignRight: 2  -->
+      <!-- Text.AlignJustify: 8  -->
+      <default>1</default>
+    </entry>
   </group>
 
 </kcfg>

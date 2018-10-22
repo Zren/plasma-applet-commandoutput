@@ -70,11 +70,11 @@ Item {
 		id: panelItem
 		Layout.minimumWidth: output.implicitWidth
 		Layout.preferredWidth: output.implicitWidth
-		// Layout.maximumWidth: output.width
 		// Layout.preferredHeight: output.implicitHeight
 
 		Text {
 			id: output
+			width: parent.width
 			height: parent.height
 
 			text: widget.outputText
@@ -86,7 +86,7 @@ Item {
 			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			fontSizeMode: Text.Fit
-			horizontalAlignment: Text.AlignHCenter
+			horizontalAlignment: plasmoid.configuration.textAlign
 			verticalAlignment: Text.AlignVCenter
 		}
 	}
