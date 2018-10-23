@@ -37,6 +37,9 @@
       <!-- Text.AlignJustify: 8  -->
       <default>1</default>
     </entry>
+    <entry name="showBackground" type="bool">
+      <default>true</default>
+    </entry>
   </group>
 
 </kcfg>

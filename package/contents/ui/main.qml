@@ -64,7 +64,9 @@ Item {
 			triggered()
 		}
 	}
-	
+
+	Plasmoid.backgroundHints: plasmoid.configuration.showBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
+
 	Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 	Plasmoid.fullRepresentation: Item {
 		id: panelItem

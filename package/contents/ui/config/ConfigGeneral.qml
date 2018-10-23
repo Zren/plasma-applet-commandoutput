@@ -62,4 +62,13 @@ ConfigPage {
 			alignConfigKey: 'textAlign'
 		}
 	}
+	
+	ConfigSection {
+		label: i18n("Misc")
+
+		ConfigCheckBox {
+			configKey: 'showBackground'
+			text: i18n("Desktop Widget: Show background")
+		}
+	}
 }
