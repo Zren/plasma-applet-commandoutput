@@ -13,6 +13,7 @@ ConfigPage {
 	
 	property alias cfg_command: command.text
 	property alias cfg_waitForCompletion: waitForCompletion.checked
+	property alias cfg_tooltipRichText: tooltipRichText.checked
 	property alias cfg_interval: interval.value
 	
 	ConfigSection {
@@ -40,6 +41,11 @@ ConfigPage {
 			id: waitForCompletion
 			text: i18n("Wait for completion")
 			enabled: false
+		}
+
+		CheckBox {
+			id: tooltipRichText
+			text: i18n("Parse stderr (ToolTip) as HTML")
 		}
 	}
 

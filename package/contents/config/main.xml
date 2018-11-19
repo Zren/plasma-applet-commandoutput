@@ -15,6 +15,9 @@
     <entry name="waitForCompletion" type="bool">
       <default>true</default>
     </entry>
+    <entry name="tooltipRichText" type="bool">
+      <default>false</default>
+    </entry>
     <entry name="fontSize" type="int">
       <default>16</default>
     </entry>
