@@ -1,4 +1,4 @@
-// Version 2
+// Version 3
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0
@@ -67,7 +67,7 @@ RowLayout {
 		onCurrentIndexChanged: {
 			if (currentIndex >= 0 && typeof model !== 'number') {
 				var val = model[currentIndex].value
-				if (configKey && val && populated) {
+				if (configKey && (typeof val !== "undefined") && populated) {
 					plasmoid.configuration[configKey] = val
 				}
 			}
