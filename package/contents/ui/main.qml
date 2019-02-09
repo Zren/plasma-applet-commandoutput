@@ -21,13 +21,27 @@ Item {
 			var exitStatus = data["exit status"]
 			var stdout = data["stdout"]
 			var stderr = data["stderr"]
-			exited(exitCode, exitStatus, stdout, stderr)
+			exited(sourceName, exitCode, exitStatus, stdout, stderr)
 			disconnectSource(sourceName) // cmd finished
 		}
 		function exec(cmd) {
-			connectSource(cmd)
+			if (cmd) {
+				connectSource(cmd)
+			}
 		}
-		signal exited(int exitCode, int exitStatus, string stdout, string stderr)
+		signal exited(string cmd, int exitCode, int exitStatus, string stdout, string stderr)
+	}
+
+	function performClick() {
+		executable.exec(plasmoid.configuration.clickCommand)
+	}
+
+	function performMouseWheelUp() {
+		executable.exec(plasmoid.configuration.mousewheelUpCommand)
+	}
+
+	function performMouseWheelDown() {
+		executable.exec(plasmoid.configuration.mousewheelDownCommand)
 	}
 
 	Item {
@@ -36,15 +50,19 @@ Item {
 		property bool waitForCompletion: plasmoid.configuration.waitForCompletion
 		property int interval: Math.max(1000, plasmoid.configuration.interval)
 		property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		property bool clickEnabled: !!plasmoid.configuration.clickCommand
+		property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
 	}
 
 	property string outputText: ''
 	Connections {
 		target: executable
 		onExited: {
-			widget.outputText = stdout.replace('\n', ' ').trim()
-			if (config.waitForCompletion) {
-				timer.restart()
+			if (cmd == config.command) {
+				widget.outputText = stdout.replace('\n', ' ').trim()
+				if (config.waitForCompletion) {
+					timer.restart()
+				}
 			}
 		}
 	}
@@ -64,6 +82,8 @@ Item {
 			triggered()
 		}
 	}
+
+	Plasmoid.onActivated: widget.performClick()
 
 	Plasmoid.backgroundHints: plasmoid.configuration.showBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
 
@@ -92,6 +112,33 @@ Item {
 			fontSizeMode: Text.Fit
 			horizontalAlignment: plasmoid.configuration.textAlign
 			verticalAlignment: Text.AlignVCenter
+		}
+
+		MouseArea {
+			id: mouseArea
+			anchors.fill: parent
+			hoverEnabled: config.clickEnabled
+
+			onClicked: {
+				widget.performClick()
+			}
+
+			property int wheelDelta: 0
+			onWheel: {
+				var delta = wheel.angleDelta.y || wheel.angleDelta.x
+				wheelDelta += delta
+				// Magic number 120 for common "one click"
+				// See: http://qt-project.org/doc/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
+				while (wheelDelta >= 120) {
+					wheelDelta -= 120
+					widget.performMouseWheelUp()
+				}
+				while (wheelDelta <= -120) {
+					wheelDelta += 120
+					widget.performMouseWheelDown()
+				}
+				wheel.accepted = true
+			}
 		}
 	}
 

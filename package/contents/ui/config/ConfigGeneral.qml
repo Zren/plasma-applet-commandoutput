@@ -14,6 +14,9 @@ ConfigPage {
 	property alias cfg_command: command.text
 	property alias cfg_waitForCompletion: waitForCompletion.checked
 	property alias cfg_interval: interval.value
+	property alias cfg_clickCommand: clickCommand.text
+	property alias cfg_mousewheelUpCommand: mousewheelUpCommand.text
+	property alias cfg_mousewheelDownCommand: mousewheelDownCommand.text
 	
 	ConfigSection {
 		label: i18n("Command")
@@ -69,6 +72,44 @@ ConfigPage {
 		ConfigCheckBox {
 			configKey: 'showBackground'
 			text: i18n("Desktop Widget: Show background")
+		}
+	}
+
+	ConfigSection {
+		label: i18n("Click")
+		
+		RowLayout {
+			Label {
+				text: i18n("Run Command:")
+			}
+			TextField {
+				id: clickCommand
+				Layout.fillWidth: true
+			}
+		}
+	}
+
+	ConfigSection {
+		label: i18n("Mouse Wheel")
+		
+		RowLayout {
+			Label {
+				text: i18n("Scroll Up:")
+			}
+			TextField {
+				id: mousewheelUpCommand
+				Layout.fillWidth: true
+			}
+		}
+		
+		RowLayout {
+			Label {
+				text: i18n("Scroll Down:")
+			}
+			TextField {
+				id: mousewheelDownCommand
+				Layout.fillWidth: true
+			}
 		}
 	}
 }

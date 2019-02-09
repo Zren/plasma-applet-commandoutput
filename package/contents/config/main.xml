@@ -40,6 +40,15 @@
     <entry name="showBackground" type="bool">
       <default>true</default>
     </entry>
+    <entry name="clickCommand" type="string">
+      <default></default>
+    </entry>
+    <entry name="mousewheelUpCommand" type="string">
+      <default></default>
+    </entry>
+    <entry name="mousewheelDownCommand" type="string">
+      <default></default>
+    </entry>
   </group>
 
 </kcfg>
