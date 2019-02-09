@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
-  <kcfgfile name=""/>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+	<kcfgfile name=""/>
 
-  <group name="General">
-    <entry name="interval" type="int">
-      <default>1000</default>
-    </entry>
-    <entry name="command" type="string">
-      <default>echo "Test $(date +%S)"</default>
-    </entry>
-    <entry name="waitForCompletion" type="bool">
-      <default>true</default>
-    </entry>
-    <entry name="fontSize" type="int">
-      <default>16</default>
-    </entry>
-    <entry name="fontFamily" type="string">
-      <default></default>
-    </entry>
-    <entry name="bold" type="bool">
-      <default>false</default>
-    </entry>
-    <entry name="italic" type="bool">
-      <default>false</default>
-    </entry>
-    <entry name="underline" type="bool">
-      <default>false</default>
-    </entry>
-    <entry name="textAlign" type="int">
-      <!-- Text.AlignLeft: 1 -->
-      <!-- Text.AlignHCenter: 4 -->
-      <!-- Text.AlignRight: 2  -->
-      <!-- Text.AlignJustify: 8  -->
-      <default>1</default>
-    </entry>
-    <entry name="showBackground" type="bool">
-      <default>true</default>
-    </entry>
-    <entry name="clickCommand" type="string">
-      <default></default>
-    </entry>
-    <entry name="mousewheelUpCommand" type="string">
-      <default></default>
-    </entry>
-    <entry name="mousewheelDownCommand" type="string">
-      <default></default>
-    </entry>
-  </group>
+	<group name="General">
+		<entry name="interval" type="int">
+			<default>1000</default>
+		</entry>
+		<entry name="command" type="string">
+			<default>echo "Test $(date +%S)"</default>
+		</entry>
+		<entry name="waitForCompletion" type="bool">
+			<default>true</default>
+		</entry>
+		<entry name="fontSize" type="int">
+			<default>16</default>
+		</entry>
+		<entry name="fontFamily" type="string">
+			<default></default>
+		</entry>
+		<entry name="bold" type="bool">
+			<default>false</default>
+		</entry>
+		<entry name="italic" type="bool">
+			<default>false</default>
+		</entry>
+		<entry name="underline" type="bool">
+			<default>false</default>
+		</entry>
+		<entry name="textAlign" type="int">
+			<!-- Text.AlignLeft: 1 -->
+			<!-- Text.AlignHCenter: 4 -->
+			<!-- Text.AlignRight: 2  -->
+			<!-- Text.AlignJustify: 8  -->
+			<default>1</default>
+		</entry>
+		<entry name="showBackground" type="bool">
+			<default>true</default>
+		</entry>
+		<entry name="clickCommand" type="string">
+			<default></default>
+		</entry>
+		<entry name="mousewheelUpCommand" type="string">
+			<default></default>
+		</entry>
+		<entry name="mousewheelDownCommand" type="string">
+			<default></default>
+		</entry>
+	</group>
 
 </kcfg>
 
