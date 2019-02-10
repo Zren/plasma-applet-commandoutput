@@ -1,3 +1,11 @@
+## v6 - February 9 2019
+
+* Fix boldness not persisting.
+* Add ability to center/right align output, italicize and underline.
+* Add ability to hide background when used as a desktop widget.
+* Fix selecting the default font after changing to another font.
+* Add ability to run a command on click / mousewheel (Issue #6)
+
 ## v5 - May 6 2018
 
 * Support use as a Desktop Widget.
