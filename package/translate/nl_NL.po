@@ -1,4 +1,4 @@
-# Translation of commandoutput in LANGUAGE
+# Translation of commandoutput in nl_NL
 # Copyright (C) 2019
 # This file is distributed under the same license as the commandoutput package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
 "POT-Creation-Date: 2019-02-09 19:08-0500\n"
 "PO-Revision-Date: 2019-02-10 13:53+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.1.1\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl_NL\n"
 
 #: ../contents/config/config.qml:7
 msgid "General"
