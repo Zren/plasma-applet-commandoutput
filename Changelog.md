@@ -1,3 +1,8 @@
+## v7 - February 13 2019
+
+* Added Dutch translation by @Vistaus (Pull Request #10)
+* Added support opening html links `<a href="">Link</a>` in your web browser.
+
 ## v6 - February 9 2019
 
 * Fix boldness not persisting.
