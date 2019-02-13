@@ -94,29 +94,8 @@ Item {
 		Layout.preferredWidth: output.implicitWidth
 		// Layout.preferredHeight: output.implicitHeight
 
-		Text {
-			id: output
-			width: parent.width
-			height: parent.height
-
-			text: widget.outputText
-
-			color: theme.textColor
-
-			linkColor: theme.linkColor
-			onLinkActivated: Qt.openUrlExternally(link)
-
-			font.pointSize: -1
-			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
-			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
-			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
-			font.italic: plasmoid.configuration.italic
-			font.underline: plasmoid.configuration.underline
-			fontSizeMode: Text.Fit
-			horizontalAlignment: plasmoid.configuration.textAlign
-			verticalAlignment: Text.AlignVCenter
-		}
-
+		// Note MouseArea is below the Text so
+		// that we don't eat the link clicks.
 		MouseArea {
 			id: mouseArea
 			anchors.fill: parent
@@ -144,6 +123,29 @@ Item {
 				}
 				wheel.accepted = true
 			}
+		}
+
+		Text {
+			id: output
+			width: parent.width
+			height: parent.height
+
+			text: widget.outputText
+
+			color: theme.textColor
+
+			linkColor: theme.linkColor
+			onLinkActivated: Qt.openUrlExternally(link)
+
+			font.pointSize: -1
+			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
+			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
+			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
+			font.italic: plasmoid.configuration.italic
+			font.underline: plasmoid.configuration.underline
+			fontSizeMode: Text.Fit
+			horizontalAlignment: plasmoid.configuration.textAlign
+			verticalAlignment: Text.AlignVCenter
 		}
 
 	}
