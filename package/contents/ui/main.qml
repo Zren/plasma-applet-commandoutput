@@ -103,6 +103,9 @@ Item {
 
 			color: theme.textColor
 
+			linkColor: theme.linkColor
+			onLinkActivated: Qt.openUrlExternally(link)
+
 			font.pointSize: -1
 			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
 			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
@@ -118,6 +121,8 @@ Item {
 			id: mouseArea
 			anchors.fill: parent
 			hoverEnabled: config.clickEnabled
+
+			cursorShape: output.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
 
 			onClicked: {
 				widget.performClick()
@@ -140,6 +145,7 @@ Item {
 				wheel.accepted = true
 			}
 		}
+
 	}
 
 }
