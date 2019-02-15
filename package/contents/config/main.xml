@@ -40,7 +40,7 @@
 		</entry>
 		<entry name="clickCommand" type="string">
 			<default></default>
-			<!-- <default>kdialog --yesno "test"</default> -->
+			<!-- <default>kdialog &#45;&#45;yesno "test"</default> -->
 		</entry>
 		<entry name="mousewheelUpCommand" type="string">
 			<default></default>
