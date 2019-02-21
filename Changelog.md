@@ -1,3 +1,7 @@
+## v8 - February 20 2019
+
+* Fix click + mousewheel commands no longer serializing (Issue #6)
+
 ## v7 - February 13 2019
 
 * Added Dutch translation by @Vistaus (Pull Request #10)
