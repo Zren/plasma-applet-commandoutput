@@ -72,14 +72,10 @@ Item {
 		interval: config.interval
 		running: true
 		repeat: !config.waitForCompletion
+		triggeredOnStart: true
 		onTriggered: {
 			// console.log('tick', Date.now())
 			executable.exec(config.command)
-		}
-
-		Component.onCompleted: {
-			// Run right away in case the interval is very long.
-			triggered()
 		}
 	}
 
