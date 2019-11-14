@@ -48,7 +48,7 @@ Item {
 		id: config
 		property bool active: !!command
 		property bool waitForCompletion: plasmoid.configuration.waitForCompletion
-		property int interval: Math.max(1000, plasmoid.configuration.interval)
+		property int interval: Math.max(0, plasmoid.configuration.interval)
 		property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
 		property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)

@@ -32,7 +32,7 @@ ConfigPage {
 			}
 			SpinBox {
 				id: interval
-				minimumValue: 1000
+				minimumValue: 0
 				stepSize: 500
 				maximumValue: 2000000000 // Close enough.
 				suffix: "ms"
