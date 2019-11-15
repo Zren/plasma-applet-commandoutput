@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
 "POT-Creation-Date: 2019-11-14 20:53-0500\n"
-"PO-Revision-Date: 2019-02-10 13:53+0100\n"
+"PO-Revision-Date: 2019-11-15 12:30+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../contents/config/config.qml
@@ -32,7 +32,7 @@ msgstr "Uitvoeren, elke "
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Wait for completion"
-msgstr "Wachten op aanvulling"
+msgstr "Wachten tot opdracht is afgerond"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Font"
@@ -44,7 +44,7 @@ msgstr "Lettertype:"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Font Size:"
-msgstr "Lettertypegrootte:"
+msgstr "Lettergrootte:"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "px"
@@ -72,11 +72,11 @@ msgstr "Bureaubladwidget: achtergrond tonen"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Fixed Width:"
-msgstr ""
+msgstr "Vaste breedte:"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Replace all newlines with spaces"
-msgstr ""
+msgstr "Alle nieuwe regels vervangen door spaties"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Click"
