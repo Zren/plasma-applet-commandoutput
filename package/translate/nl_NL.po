@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2019-02-09 19:08-0500\n"
+"POT-Creation-Date: 2019-11-14 19:34-0500\n"
 "PO-Revision-Date: 2019-02-10 13:53+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
@@ -18,71 +18,83 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../contents/config/config.qml:7
+#: ../contents/config/config.qml
 msgid "General"
 msgstr "Algemeen"
 
-#: ../contents/ui/config/ConfigGeneral.qml:22
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Command"
 msgstr "Opdracht"
 
-#: ../contents/ui/config/ConfigGeneral.qml:31
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Run every "
 msgstr "Uitvoeren, elke "
 
-#: ../contents/ui/config/ConfigGeneral.qml:44
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Wait for completion"
 msgstr "Wachten op aanvulling"
 
-#: ../contents/ui/config/ConfigGeneral.qml:50
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Font"
 msgstr "Lettertype"
 
-#: ../contents/ui/config/ConfigGeneral.qml:54
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Font Family:"
 msgstr "Lettertype:"
 
-#: ../contents/ui/config/ConfigGeneral.qml:58
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Font Size:"
 msgstr "Lettertypegrootte:"
 
-#: ../contents/ui/config/ConfigGeneral.qml:59
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "px"
 msgstr "px"
 
-#: ../contents/ui/config/ConfigGeneral.qml:70
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Colors"
+msgstr "Kleuren"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Text:"
+msgstr "Tekst:"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Outline:"
+msgstr "Contour:"
+
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Misc"
 msgstr "Overig"
 
-#: ../contents/ui/config/ConfigGeneral.qml:74
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Desktop Widget: Show background"
 msgstr "Bureaubladwidget: achtergrond tonen"
 
-#: ../contents/ui/config/ConfigGeneral.qml:79
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Click"
 msgstr "Klikken"
 
-#: ../contents/ui/config/ConfigGeneral.qml:83
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Run Command:"
 msgstr "Opdracht uitvoeren:"
 
-#: ../contents/ui/config/ConfigGeneral.qml:93
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Mouse Wheel"
 msgstr "Muiswiel"
 
-#: ../contents/ui/config/ConfigGeneral.qml:97
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Scroll Up:"
 msgstr "Omhoog scrollen:"
 
-#: ../contents/ui/config/ConfigGeneral.qml:107
+#: ../contents/ui/config/ConfigGeneral.qml
 msgid "Scroll Down:"
 msgstr "Omlaag scrollen:"
 
-#: ../contents/ui/lib/AppletVersion.qml:41
+#: ../contents/ui/lib/AppletVersion.qml
 msgid "<b>Version:</b> %1"
 msgstr "<b>Versie:</b> %1"
 
-#: ../contents/ui/lib/ConfigFontFamily.qml:11
+#: ../contents/ui/lib/ConfigFontFamily.qml
 msgctxt "Use default font"
 msgid "Default"
 msgstr "Standaard"
