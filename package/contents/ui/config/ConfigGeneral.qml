@@ -78,11 +78,12 @@ ConfigPage {
 			spacing: 0
 			ConfigCheckBox {
 				configKey: 'showOutline'
+				text: i18n("Outline:")
 			}
 			ConfigColor {
 				configKey: 'outlineColor'
 				defaultColor: theme.backgroundColor
-				label: i18n("Outline:")
+				label: ""
 			}
 		}
 	}
@@ -98,10 +99,10 @@ ConfigPage {
 			spacing: 0
 			ConfigCheckBox {
 				configKey: 'useFixedWidth'
+				text: i18n("Fixed Width:")
 			}
 			ConfigSpinBox {
 				configKey: 'fixedWidth'
-				before: i18n("Fixed Width:")
 				suffix: i18n("px")
 			}
 		}
