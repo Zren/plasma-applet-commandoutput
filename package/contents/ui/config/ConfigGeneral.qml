@@ -75,6 +75,7 @@ ConfigPage {
 			label: i18n("Text:")
 		}
 		RowLayout {
+			spacing: 0
 			ConfigCheckBox {
 				configKey: 'showOutline'
 			}
@@ -84,7 +85,6 @@ ConfigPage {
 				label: i18n("Outline:")
 			}
 		}
-		
 	}
 
 	ConfigSection {
@@ -93,6 +93,17 @@ ConfigPage {
 		ConfigCheckBox {
 			configKey: 'showBackground'
 			text: i18n("Desktop Widget: Show background")
+		}
+		RowLayout {
+			spacing: 0
+			ConfigCheckBox {
+				configKey: 'useFixedWidth'
+			}
+			ConfigSpinBox {
+				configKey: 'fixedWidth'
+				before: i18n("Fixed Width:")
+				suffix: i18n("px")
+			}
 		}
 	}
 

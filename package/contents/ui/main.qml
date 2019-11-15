@@ -97,8 +97,10 @@ Item {
 	Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
 	Plasmoid.fullRepresentation: Item {
 		id: panelItem
-		Layout.minimumWidth: output.implicitWidth
-		Layout.preferredWidth: output.implicitWidth
+
+		property int itemWidth: plasmoid.configuration.useFixedWidth ? plasmoid.configuration.fixedWidth * units.devicePixelRatio : output.implicitWidth
+		Layout.minimumWidth: itemWidth
+		Layout.preferredWidth: itemWidth
 		// Layout.preferredHeight: output.implicitHeight
 
 		// Note MouseArea is below the Text so
@@ -155,6 +157,7 @@ Item {
 			fontSizeMode: Text.Fit
 			horizontalAlignment: plasmoid.configuration.textAlign
 			verticalAlignment: Text.AlignVCenter
+			elide: plasmoid.configuration.useFixedWidth ? Text.ElideRight : Text.ElideNone
 		}
 
 	}
