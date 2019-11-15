@@ -1,3 +1,12 @@
+## v9 - November 15 2019
+
+* Change hardcoded min interval to 0ms instead of 1000ms.
+* Only remove final newline in stdout. Previous behavior can be re-enabled in the config. (Issue #3)
+* Add ability to set default text+outline color like simpleweather.
+* Run command immediately on command change. Fixes bug where widget stops updating if command was changed after command was run, but before the command finishes.
+* Add ability to set a fixed width (off by default).
+* Update Dutch translation by @Vistaus (Pull Request #16)
+
 ## v8 - February 20 2019
 
 * Fix click + mousewheel commands no longer serializing (Issue #6)
