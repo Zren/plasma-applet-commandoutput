@@ -64,7 +64,16 @@ Item {
 		target: executable
 		onExited: {
 			if (cmd == config.command) {
-				widget.outputText = stdout.replace('\n', ' ').trim()
+				var formattedText = stdout
+				if (plasmoid.configuration.replaceAllNewlines) {
+					formattedText = formattedText.replace('\n', ' ').trim()
+				} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
+					formattedText = formattedText.substr(0, formattedText.length-1)
+				}
+				// console.log('[commandoutput]', 'stdout', JSON.stringify(stdout))
+				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
+				widget.outputText = formattedText
+
 				if (config.waitForCompletion) {
 					timer.restart()
 				}

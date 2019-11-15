@@ -105,6 +105,10 @@ ConfigPage {
 				suffix: i18n("px")
 			}
 		}
+		ConfigCheckBox {
+			configKey: 'replaceAllNewlines'
+			text: i18n("Replace all newlines with spaces")
+		}
 	}
 
 	ConfigSection {

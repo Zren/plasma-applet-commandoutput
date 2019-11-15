@@ -63,6 +63,9 @@
 		<entry name="fixedWidth" type="int">
 			<default>100</default>
 		</entry>
+		<entry name="replaceAllNewlines" type="bool">
+			<default>false</default>
+		</entry>
 	</group>
 
 </kcfg>
