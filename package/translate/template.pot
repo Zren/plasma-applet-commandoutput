@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput \n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2019-11-14 19:34-0500\n"
+"POT-Creation-Date: 2019-11-14 20:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,6 +67,14 @@ msgstr ""
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Desktop Widget: Show background"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Fixed Width:"
+msgstr ""
+
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Replace all newlines with spaces"
 msgstr ""
 
 #: ../contents/ui/config/ConfigGeneral.qml
