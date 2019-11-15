@@ -52,6 +52,9 @@ Item {
 		property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
 		property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
+		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
+		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
+		readonly property bool showOutline: plasmoid.configuration.showOutline
 	}
 
 	property string outputText: ''
@@ -128,7 +131,9 @@ Item {
 
 			text: widget.outputText
 
-			color: theme.textColor
+			color: config.textColor
+			style: config.showOutline ? Text.Outline : Text.Normal
+			styleColor: config.outlineColor
 
 			linkColor: theme.linkColor
 			onLinkActivated: Qt.openUrlExternally(link)

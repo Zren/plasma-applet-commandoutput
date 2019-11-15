@@ -65,7 +65,28 @@ ConfigPage {
 			alignConfigKey: 'textAlign'
 		}
 	}
-	
+
+	ConfigSection {
+		label: i18n("Colors")
+
+		ConfigColor {
+			configKey: 'textColor'
+			defaultColor: theme.textColor
+			label: i18n("Text:")
+		}
+		RowLayout {
+			ConfigCheckBox {
+				configKey: 'showOutline'
+			}
+			ConfigColor {
+				configKey: 'outlineColor'
+				defaultColor: theme.backgroundColor
+				label: i18n("Outline:")
+			}
+		}
+		
+	}
+
 	ConfigSection {
 		label: i18n("Misc")
 

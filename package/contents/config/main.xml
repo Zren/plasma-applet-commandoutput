@@ -35,6 +35,15 @@
 			<!-- Text.AlignJustify: 8  -->
 			<default>1</default>
 		</entry>
+		<entry name="textColor" type="string">
+			<default></default>
+		</entry>
+		<entry name="outlineColor" type="string">
+			<default></default>
+		</entry>
+		<entry name="showOutline" type="bool">
+			<default>false</default>
+		</entry>
 		<entry name="showBackground" type="bool">
 			<default>true</default>
 		</entry>
