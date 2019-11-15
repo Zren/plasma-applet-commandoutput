@@ -55,6 +55,8 @@ Item {
 		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
+
+		onCommandChanged: widget.runCommand()
 	}
 
 	property string outputText: ''
@@ -70,16 +72,18 @@ Item {
 		}
 	}
 
+	function runCommand() {
+		// console.log('runCommand', Date.now())
+		executable.exec(config.command)
+	}
+
 	Timer {
 		id: timer
 		interval: config.interval
 		running: true
 		repeat: !config.waitForCompletion
 		triggeredOnStart: true
-		onTriggered: {
-			// console.log('tick', Date.now())
-			executable.exec(config.command)
-		}
+		onTriggered: widget.runCommand()
 	}
 
 	Plasmoid.onActivated: widget.performClick()
