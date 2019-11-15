@@ -73,7 +73,7 @@ Item {
 	}
 
 	function runCommand() {
-		// console.log('runCommand', Date.now())
+		// console.log('[commandoutput]', Date.now(), 'runCommand', config.command)
 		executable.exec(config.command)
 	}
 
@@ -82,8 +82,12 @@ Item {
 		interval: config.interval
 		running: true
 		repeat: !config.waitForCompletion
-		triggeredOnStart: true
 		onTriggered: widget.runCommand()
+
+		Component.onCompleted: {
+			// Run right away in case the interval is very long.
+			triggered()
+		}
 	}
 
 	Plasmoid.onActivated: widget.performClick()
