@@ -46,12 +46,12 @@ Item {
 
 	Item {
 		id: config
-		property bool active: !!command
-		property bool waitForCompletion: plasmoid.configuration.waitForCompletion
-		property int interval: Math.max(0, plasmoid.configuration.interval)
-		property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
-		property bool clickEnabled: !!plasmoid.configuration.clickCommand
-		property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
+		readonly property bool active: !!command
+		readonly property bool waitForCompletion: plasmoid.configuration.waitForCompletion
+		readonly property int interval: Math.max(0, plasmoid.configuration.interval)
+		readonly property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
+		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
 		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
