@@ -63,6 +63,12 @@
 		<entry name="fixedWidth" type="int">
 			<default>100</default>
 		</entry>
+		<entry name="useFixedHeight" type="bool">
+			<default>false</default>
+		</entry>
+		<entry name="fixedHeight" type="int">
+			<default>100</default>
+		</entry>
 		<entry name="replaceAllNewlines" type="bool">
 			<default>false</default>
 		</entry>

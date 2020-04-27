@@ -106,6 +106,17 @@ ConfigPage {
 				suffix: i18n("px")
 			}
 		}
+		RowLayout {
+			spacing: 0
+			ConfigCheckBox {
+				configKey: 'useFixedHeight'
+				text: i18n("Fixed Height:")
+			}
+			ConfigSpinBox {
+				configKey: 'fixedHeight'
+				suffix: i18n("px")
+			}
+		}
 		ConfigCheckBox {
 			configKey: 'replaceAllNewlines'
 			text: i18n("Replace all newlines with spaces")
