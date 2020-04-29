@@ -156,6 +156,12 @@ Item {
 			}
 		}
 
+		PlasmaCore.ToolTipArea {
+			anchors.fill: parent
+			subText: output.text
+			enabled: output.truncated
+		}
+
 		Text {
 			id: output
 			width: parent.width
