@@ -176,10 +176,23 @@ Item {
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			font.italic: plasmoid.configuration.italic
 			font.underline: plasmoid.configuration.underline
-			fontSizeMode: Text.Fit
+			fontSizeMode: Text.FixedSize
 			horizontalAlignment: plasmoid.configuration.textAlign
 			verticalAlignment: Text.AlignVCenter
-			elide: plasmoid.configuration.useFixedWidth ? Text.ElideRight : Text.ElideNone
+
+			property bool isFixedWidth: {
+				if (plasmoid.formFactor == PlasmaCore.Types.Planar) { // Desktop Widget
+					return true
+				} else if (plasmoid.formFactor == PlasmaCore.Types.Horizontal) {
+					return plasmoid.configuration.useFixedWidth
+				} else if (plasmoid.formFactor == PlasmaCore.Types.Vertical) {
+					return true
+				} else {
+					return false
+				}
+			}
+			elide: Text.ElideRight
+			wrapMode: isFixedWidth ? Text.Wrap : Text.NoWrap
 		}
 
 	}
