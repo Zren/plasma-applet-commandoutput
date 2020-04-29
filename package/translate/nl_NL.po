@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2019-11-14 20:53-0500\n"
+"POT-Creation-Date: 2020-04-29 17:41-0400\n"
 "PO-Revision-Date: 2019-11-15 12:30+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
@@ -73,6 +73,10 @@ msgstr "Bureaubladwidget: achtergrond tonen"
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Fixed Width:"
 msgstr "Vaste breedte:"
+
+#: ../contents/ui/config/ConfigGeneral.qml
+msgid "Fixed Height:"
+msgstr ""
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Replace all newlines with spaces"
