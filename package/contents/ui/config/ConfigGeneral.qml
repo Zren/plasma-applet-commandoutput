@@ -97,6 +97,7 @@ ConfigPage {
 		}
 		RowLayout {
 			spacing: 0
+			visible: plasmoid.formFactor == PlasmaCore.Types.Horizontal
 			ConfigCheckBox {
 				configKey: 'useFixedWidth'
 				text: i18n("Fixed Width:")
@@ -108,6 +109,7 @@ ConfigPage {
 		}
 		RowLayout {
 			spacing: 0
+			visible: plasmoid.formFactor == PlasmaCore.Types.Vertical
 			ConfigCheckBox {
 				configKey: 'useFixedHeight'
 				text: i18n("Fixed Height:")
