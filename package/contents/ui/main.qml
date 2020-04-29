@@ -107,10 +107,23 @@ Item {
 	Plasmoid.fullRepresentation: Item {
 		id: panelItem
 
-		property int itemWidth: plasmoid.configuration.useFixedWidth ? plasmoid.configuration.fixedWidth * units.devicePixelRatio : output.implicitWidth
-		Layout.minimumWidth: itemWidth
-		Layout.preferredWidth: itemWidth
-		// Layout.preferredHeight: output.implicitHeight
+		readonly property bool isHorizontal: plasmoid.formFactor == PlasmaCore.Types.Horizontal
+		readonly property bool isVertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
+
+		property int itemWidth: isHorizontal && plasmoid.configuration.useFixedWidth ? plasmoid.configuration.fixedWidth * units.devicePixelRatio : Math.ceil(output.implicitWidth)
+		Layout.minimumWidth: plasmoid.formFactor == PlasmaCore.Types.Horizontal ? itemWidth : -1
+		Layout.fillWidth: isVertical
+		Layout.preferredWidth: itemWidth // Panel widget default
+		width: itemWidth // Desktop widget default
+		// onItemWidthChanged: console.log('itemWidth', itemWidth, 'implicitWidth', output.implicitWidth, 'contentWidth', output.contentWidth)
+
+		property int itemHeight: isVertical && plasmoid.configuration.useFixedHeight ? plasmoid.configuration.fixedHeight * units.devicePixelRatio : Math.ceil(output.implicitHeight)
+		Layout.minimumHeight: isVertical ? itemHeight : -1
+		Layout.fillHeight: isHorizontal
+		Layout.preferredHeight: itemHeight // Panel widget default
+		height: itemHeight // Desktop widget default
+		// onItemHeightChanged: console.log('itemHeight', itemHeight, 'implicitHeight', output.implicitHeight, 'contentHeight', output.contentHeight)
+
 
 		// Note MouseArea is below the Text so
 		// that we don't eat the link clicks.
