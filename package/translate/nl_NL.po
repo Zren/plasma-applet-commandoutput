@@ -76,11 +76,11 @@ msgstr "Vaste breedte:"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Fixed Height:"
-msgstr ""
+msgstr "Vaste hoogte:"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Replace all newlines with spaces"
-msgstr "Alle nieuwe regels vervangen door spaties"
+msgstr "Alle witregels vervangen door spaties"
 
 #: ../contents/ui/config/ConfigGeneral.qml
 msgid "Click"
