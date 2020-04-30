@@ -1,3 +1,10 @@
+## v10 - April 30 2020
+
+* Add fixed height setting (Issue #18)
+* Always use a fixed size font (Issue #18)
+* Wrap only if we don't have a fixed width (not horz panel).
+* Show truncated/elided text in tooltip.
+
 ## v9 - November 15 2019
 
 * Change hardcoded min interval to 0ms instead of 1000ms.
