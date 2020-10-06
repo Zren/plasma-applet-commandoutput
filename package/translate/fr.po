@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../metadata.desktop
 msgid "Command Output"
-msgstr ""
+msgstr "Command Output"
 
 #: ../metadata.desktop
-msgid "Run a command periodically and render it's output."
-msgstr ""
+msgid "Run a command periodically and render its output."
+msgstr "Exécute une commande périodiquement et affiche son retour."
 
 #: ../contents/config/config.qml
 msgid "General"

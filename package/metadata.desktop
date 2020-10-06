@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Command Output
-Comment=Run a command periodically and render it's output.
+Comment=Run a command periodically and render its output.
 
 Type=Service
 Icon=utilities-terminal
