@@ -23,7 +23,7 @@ msgid "Command Output"
 msgstr "Opdrachtuitvoer"
 
 #: ../metadata.desktop
-msgid "Run a command periodically and render it's output."
+msgid "Run a command periodically and render its output."
 msgstr "Voer een opdracht periodiek uit en toon de uitvoer ervan."
 
 #: ../contents/config/config.qml
