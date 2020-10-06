@@ -15,3 +15,8 @@ X-KDE-PluginInfo-Name=com.github.zren.commandoutput
 X-KDE-PluginInfo-Version=10
 X-KDE-PluginInfo-Website=https://github.com/Zren/plasma-applet-commandoutput
 X-KDE-PluginInfo-Category=System Information
+
+Name[fr]=Command Output
+Name[nl]=Opdrachtuitvoer
+Comment[fr]=Exécute une commande périodiquement et affiche son retour.
+Comment[nl]=Voer een opdracht periodiek uit en toon de uitvoer ervan.
