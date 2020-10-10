@@ -109,19 +109,37 @@ Item {
 
 		readonly property bool isHorizontal: plasmoid.formFactor == PlasmaCore.Types.Horizontal
 		readonly property bool isVertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
+		readonly property bool isInPanel: isHorizontal || isVertical
+		readonly property bool isOnDesktop: !isInPanel
 
-		property int itemWidth: isHorizontal && plasmoid.configuration.useFixedWidth ? plasmoid.configuration.fixedWidth * units.devicePixelRatio : Math.ceil(output.implicitWidth)
-		Layout.minimumWidth: plasmoid.formFactor == PlasmaCore.Types.Horizontal ? itemWidth : -1
+		readonly property int itemWidth: {
+			if (isOnDesktop) {
+				return Math.ceil(output.contentWidth)
+			} else if (isHorizontal && plasmoid.configuration.useFixedWidth) {
+				return plasmoid.configuration.fixedWidth * units.devicePixelRatio
+			} else { // isHorizontal || isVertical
+				return Math.ceil(output.implicitWidth)
+			}
+		}
+		Layout.minimumWidth: isHorizontal ? itemWidth : -1
 		Layout.fillWidth: isVertical
 		Layout.preferredWidth: itemWidth // Panel widget default
-		width: itemWidth // Desktop widget default
+		// width: itemWidth // Desktop widget default
 		// onItemWidthChanged: console.log('itemWidth', itemWidth, 'implicitWidth', output.implicitWidth, 'contentWidth', output.contentWidth)
 
-		property int itemHeight: isVertical && plasmoid.configuration.useFixedHeight ? plasmoid.configuration.fixedHeight * units.devicePixelRatio : Math.ceil(output.implicitHeight)
+		readonly property int itemHeight: {
+			if (isOnDesktop) {
+				return Math.ceil(output.contentHeight)
+			} else if (isVertical && plasmoid.configuration.useFixedHeight) {
+				return plasmoid.configuration.fixedHeight * units.devicePixelRatio
+			} else { // isHorizontal || isVertical
+				return Math.ceil(output.implicitHeight)
+			}
+		}
 		Layout.minimumHeight: isVertical ? itemHeight : -1
 		Layout.fillHeight: isHorizontal
 		Layout.preferredHeight: itemHeight // Panel widget default
-		height: itemHeight // Desktop widget default
+		// height: itemHeight // Desktop widget default
 		// onItemHeightChanged: console.log('itemHeight', itemHeight, 'implicitHeight', output.implicitHeight, 'contentHeight', output.contentHeight)
 
 
