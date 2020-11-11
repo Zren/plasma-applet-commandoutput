@@ -1,3 +1,10 @@
+## v11 - November 11 2020
+
+* Don't auto resize desktop widgets (Issue #22)
+* Update various i18n scripts, the widget name is now translated.
+* Added French translations by @Almtesh (Pull Request #23 and #24)
+* Updated Dutch translations by @Vistaus (Pull Request #25)
+
 ## v10 - April 30 2020
 
 * Add fixed height setting (Issue #18)
