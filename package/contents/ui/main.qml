@@ -57,6 +57,11 @@ Item {
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
 		onCommandChanged: widget.runCommand()
+		onIntervalChanged: {
+			// interval=0 stops the timer even with Timer.repeat=true, so we may
+			// need to restart the timer. Might as well restart the interval too.
+			timer.restart()
+		}
 		onWaitForCompletionChanged: {
 			if (!waitForCompletion) {
 				// The timer needs to be restarted in case the timer was already
@@ -100,6 +105,9 @@ Item {
 		running: true
 		repeat: !config.waitForCompletion
 		onTriggered: widget.runCommand()
+		// onIntervalChanged: console.log('interval', interval)
+		// onRunningChanged: console.log('running', running)
+		// onRepeatChanged: console.log('repeat', repeat)
 
 		Component.onCompleted: {
 			// Run right away in case the interval is very long.
