@@ -11,7 +11,7 @@
 			<!-- <default>echo "&lt;a href=\"https://google.com\"&gt;Test $(date +%S)&lt;/a&gt;"</default> -->
 		</entry>
 		<entry name="waitForCompletion" type="bool">
-			<default>true</default>
+			<default>false</default>
 		</entry>
 		<entry name="fontSize" type="int">
 			<default>16</default>

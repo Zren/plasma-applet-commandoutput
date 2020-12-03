@@ -42,7 +42,6 @@ ConfigPage {
 		CheckBox {
 			id: waitForCompletion
 			text: i18n("Wait for completion")
-			enabled: false
 		}
 	}
 

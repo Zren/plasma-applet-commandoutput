@@ -57,6 +57,14 @@ Item {
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
 		onCommandChanged: widget.runCommand()
+		onWaitForCompletionChanged: {
+			if (!waitForCompletion) {
+				// The timer needs to be restarted in case the timer was already
+				// triggered and the command is running. If we don't restart the
+				// timer, it'll stop forever.
+				timer.restart()
+			}
+		}
 	}
 
 	property string outputText: ''
