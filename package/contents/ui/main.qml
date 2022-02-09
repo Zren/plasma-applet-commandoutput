@@ -55,6 +55,7 @@ Item {
 		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
+		readonly property string toolTip: plasmoid.configuration.toolTip || ''
 
 		onCommandChanged: widget.runCommand()
 		onIntervalChanged: {
@@ -190,16 +191,17 @@ Item {
 			}
 		}
 
-		PlasmaCore.ToolTipArea {
-			anchors.fill: parent
-			subText: output.text
-			enabled: output.truncated
-		}
-
 		Text {
 			id: output
 			width: parent.width
 			height: parent.height
+
+			PlasmaCore.ToolTipArea {
+				anchors.fill: parent
+				mainText: config.toolTip
+				//subText: output.text
+				enabled: config.toolTip
+			}
 
 			text: widget.outputText
 

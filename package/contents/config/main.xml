@@ -10,6 +10,9 @@
 			<default>echo "Test $(date +%S)"</default>
 			<!-- <default>echo "&lt;a href=\"https://google.com\"&gt;Test $(date +%S)&lt;/a&gt;"</default> -->
 		</entry>
+		<entry name="toolTip" type="string">
+			<default></default>
+		</entry>
 		<entry name="waitForCompletion" type="bool">
 			<default>false</default>
 		</entry>
