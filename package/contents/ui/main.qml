@@ -78,8 +78,10 @@ Item {
 		onExited: {
 			if (cmd == config.command) {
 				var formattedText = stdout
+
+				// Newlines
 				if (plasmoid.configuration.replaceAllNewlines) {
-					formattedText = formattedText.replace('\n', ' ').trim()
+					formattedText = formattedText.replace(/\n/g, ' ').trim()
 				} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
 					formattedText = formattedText.substr(0, formattedText.length-1)
 				}
