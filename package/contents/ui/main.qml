@@ -72,6 +72,60 @@ Item {
 		}
 	}
 
+	// https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+	property var ansiColors: ({
+		30: '#000000', // Black
+		31: '#aa0000', // Red
+		32: '#00aa00', // Green
+		33: '#aa6500', // Yellow
+		34: '#0000aa', // Blue
+		35: '#aa00aa', // Magenta
+		36: '#00aaaa', // Cyan
+		37: '#aaaaaa', // White
+		90: '#656565', // Bright Black
+		91: '#ff6565', // Bright Red
+		92: '#65ff65', // Bright Green
+		93: '#ffff65', // Bright Yellow
+		94: '#6565ff', // Bright Blue
+		95: '#ff65ff', // Bright Magenta
+		96: '#65ffff', // Bright Cyan
+		97: '#ffffff', // Bright White
+	})
+	function resetState(state) {
+		var out = state.closeTags.join(' ')
+		state.bold = false
+		state.closeTags = []
+		return out
+	}
+	function parseAnsiCode(n, state) {
+		if (n == 0) { // Reset
+			return resetState(state)
+		} else if (n == 1) {
+			state.closeTags.push('</b>')
+			state.bold = true
+			return '<b>'
+		} else if (30 <= n && n <= 37 || 90 <= n && n <= 97) {
+			if (state.bold && 30 <= n && n <= 37) {
+				// Bold also intensifies the colors to "Bright".
+				// 30 => 90
+				n += 60
+			}
+			var hexColor = ansiColors[n]
+			state.closeTags.push('</font>')
+			return '<font color="' + hexColor + '">'
+		}
+	}
+	function parseAnsiEscape(codes, state) {
+		var tokens = codes.split(';')
+		var out = ''
+		for (var i = 0; i < tokens.length; i++) {
+			var token = tokens[i]
+			var n = parseInt(token, 10)
+			out += parseAnsiCode(n, state)
+		}
+		return out
+	}
+
 	property string outputText: ''
 	Connections {
 		target: executable
@@ -85,6 +139,24 @@ Item {
 				} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
 					formattedText = formattedText.substr(0, formattedText.length-1)
 				}
+
+				// Terminal Colors (Issue #7)
+				var state = {
+					html: false,
+					bold: false,
+					closeTags: [],
+				}
+				formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)m/g, function(match, p1, p2){
+					state.html = true
+					return parseAnsiEscape(p1, state)
+				})
+				formattedText += resetState(state)
+
+				// Format Newlines when in HTML mode
+				if (state.html) {
+					formattedText = formattedText.replace(/\n/g, '<br>')
+				}
+
 				// console.log('[commandoutput]', 'stdout', JSON.stringify(stdout))
 				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
 				widget.outputText = formattedText
