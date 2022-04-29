@@ -1,3 +1,12 @@
+## v12 - April 29 2022
+
+* Implement parsing terminal colors (ansi escape sequences) (Issue #7)
+* Implement vertical alignment of text.
+* Restart the timer when interval is changed (Issue #27)
+* Enable waitForCompletion and make it off by default and fix toggle bug (Issue #27)
+* Add GPL-2.0+ License File by @matthiasbeyer (Pull Request #33)
+* Replace all newlines instead of first matched newline (Issue #3)
+
 ## v11 - November 11 2020
 
 * Don't auto resize desktop widgets (Issue #22)
