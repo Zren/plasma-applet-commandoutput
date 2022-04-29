@@ -5,10 +5,12 @@
 	<group name="General">
 		<entry name="interval" type="int">
 			<default>1000</default>
+			<!-- <default>60000</default> -->
 		</entry>
 		<entry name="command" type="string">
 			<default>echo "Test $(date +%S)"</default>
 			<!-- <default>echo "&lt;a href=\"https://google.com\"&gt;Test $(date +%S)&lt;/a&gt;"</default> -->
+			<!-- <default>SYSTEMD_COLORS=1 journalctl -q -b0 -n20</default> -->
 		</entry>
 		<entry name="waitForCompletion" type="bool">
 			<default>false</default>
