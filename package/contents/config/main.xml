@@ -35,6 +35,12 @@
 			<!-- Text.AlignJustify: 8  -->
 			<default>1</default>
 		</entry>
+		<entry name="vertAlign" type="int">
+			<!-- Text.AlignTop: 32 -->
+			<!-- Text.AlignVCenter: 128 -->
+			<!-- Text.AlignBottom: 64  -->
+			<default>128</default>
+		</entry>
 		<entry name="textColor" type="string">
 			<default></default>
 		</entry>

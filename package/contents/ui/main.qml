@@ -296,7 +296,7 @@ Item {
 			font.underline: plasmoid.configuration.underline
 			fontSizeMode: Text.FixedSize
 			horizontalAlignment: plasmoid.configuration.textAlign
-			verticalAlignment: Text.AlignVCenter
+			verticalAlignment: plasmoid.configuration.vertAlign
 
 			property bool isFixedWidth: {
 				if (plasmoid.formFactor == PlasmaCore.Types.Planar) { // Desktop Widget

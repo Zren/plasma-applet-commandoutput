@@ -62,6 +62,7 @@ ConfigPage {
 			italicConfigKey: 'italic'
 			underlineConfigKey: 'underline'
 			alignConfigKey: 'textAlign'
+			vertAlignConfigKey: 'vertAlign'
 		}
 	}
 
