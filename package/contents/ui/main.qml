@@ -97,7 +97,7 @@ Item {
 		state.closeTags = []
 		return out
 	}
-	function parseAnsiCode(n, state) {
+	function parseAnsiCode(n, i, tokens, state) {
 		if (n == 0) { // Reset
 			return resetState(state)
 		} else if (n == 1) {
@@ -113,15 +113,73 @@ Item {
 			var hexColor = ansiColors[n]
 			state.closeTags.push('</font>')
 			return '<font color="' + hexColor + '">'
+		} else {
+			return ''
 		}
+	}
+	// https://stackoverflow.com/questions/4745317/converting-integers-to-hex-string-in-javascript
+	function formatHexInt(n) {
+		var num = Number(n)
+		if (isNaN(num)) {
+			return "00"
+		}
+		num = Math.max(0, Math.min(num, 255))
+		var str = num.toString(16)
+		return str.length == 1 ? '0' + str : str
+	}
+	function rgbToHex(r, g, b) {
+		return '#' + formatHexInt(r) + formatHexInt(g) + formatHexInt(b)
+	}
+	function parseColorMode(i, tokens) {
+		var colorMode = parseInt(tokens[++i], 10)
+		if (colorMode == 2) { // RGB
+			var r = parseInt(tokens[++i], 10)
+			var g = parseInt(tokens[++i], 10)
+			var b = parseInt(tokens[++i], 10)
+			return rgbToHex(r, g, b)
+		} else if (colorMode == 5) { // Preset of 256 colors
+			// Logic taken from Konsole
+			// https://invent.kde.org/utilities/konsole/-/blob/master/src/autotests/CharacterColorTest.cpp#L159
+			var n = parseInt(tokens[++i], 10)
+			if (0 <= n && n <= 7) { // Normal
+				var u = n + 30
+				return ansiColors[u]
+			} else if (8 <= n && n <= 15) { // Bright
+				var u = n - 8 + 90
+				return ansiColors[u]
+			} else if (16 <= n && n <= 231) { // 212
+				var u = n - 16
+				var r = Math.floor(((u / 36) % 6) != 0 ? (40 * ((u / 36) % 6) + 55) : 0)
+				var g = Math.floor(((u / 6) % 6) != 0 ? (40 * ((u / 6) % 6) + 55) : 0)
+				var b = Math.floor(((u / 1) % 6) != 0 ? (40 * ((u / 1) % 6) + 55) : 0)
+				return rgbToHex(r, g, b)
+			} else if (232 <= n && n <= 255) {
+				var gray = Math.floor((n - 232) * 10 + 8)
+				return rgbToHex(gray, gray, gray)
+			}
+		}
+		return null
 	}
 	function parseAnsiEscape(codes, state) {
 		var tokens = codes.split(';')
 		var out = ''
 		for (var i = 0; i < tokens.length; i++) {
+			tokens[i] = parseInt(tokens[i], 10)
+		}
+		for (var i = 0; i < tokens.length; i++) {
 			var token = tokens[i]
-			var n = parseInt(token, 10)
-			out += parseAnsiCode(n, state)
+			if (token == 38) { // Set FG
+				var hexColor = parseColorMode(i, tokens)
+				if (hexColor) {
+					state.closeTags.push('</font>')
+					out += '<font color="' + hexColor + '">'
+				}
+			} else if (token == 48) { // Set BG
+				var hexColor = parseColorMode(i, tokens)
+				// Ignore
+			} else {
+				out += parseAnsiCode(token, i, tokens, state)
+			}
 		}
 		return out
 	}
