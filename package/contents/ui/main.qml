@@ -146,9 +146,13 @@ Item {
 					bold: false,
 					closeTags: [],
 				}
-				formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)m/g, function(match, p1, p2){
+				formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)?m/g, function(match, p1, p2){
 					state.html = true
-					return parseAnsiEscape(p1, state)
+					if (typeof p1 === 'string') {
+						return parseAnsiEscape(p1, state)
+					} else { // \033[m is Reset
+						return parseAnsiEscape('0', state)
+					}
 				})
 				formattedText += resetState(state)
 
