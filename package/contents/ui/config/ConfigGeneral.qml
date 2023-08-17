@@ -83,6 +83,7 @@ Kirigami.FormLayout {
 		Kirigami.FormData.label: i18n("Desktop Widget:")
 		configKey: 'showBackground'
 		text: i18n("Show background")
+		visible: plasmoid.location == PlasmaCore.Types.Floating
 	}
 	RowLayout {
 		Kirigami.FormData.label: i18n("Fixed Width:")
@@ -99,7 +100,7 @@ Kirigami.FormLayout {
 	RowLayout {
 		Kirigami.FormData.label: i18n("Fixed Height:")
 		spacing: 0
-		visible: plasmoid.formFactor == PlasmaCore.Types.Horizontal
+		visible: plasmoid.formFactor == PlasmaCore.Types.Vertical
 		LibConfig.CheckBox {
 			configKey: 'useFixedHeight'
 		}
