@@ -49,7 +49,7 @@ Kirigami.FormLayout {
 		italicConfigKey: 'italic'
 		underlineConfigKey: 'underline'
 		alignConfigKey: 'textAlign'
-		// vertAlignConfigKey: 'vertAlign'
+		vertAlignConfigKey: 'vertAlign'
 	}
 
 
