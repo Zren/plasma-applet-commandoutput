@@ -12,6 +12,9 @@
 			<!-- <default>echo "&lt;a href=\"https://google.com\"&gt;Test $(date +%S)&lt;/a&gt;"</default> -->
 			<!-- <default>SYSTEMD_COLORS=1 journalctl -q -b0 -n20</default> -->
 		</entry>
+		<entry name="tooltipCommand" type="string">
+			<default>echo "Tooltip test $(date +%S)"</default>
+		</entry>
 		<entry name="waitForCompletion" type="bool">
 			<default>false</default>
 		</entry>

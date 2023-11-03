@@ -50,6 +50,7 @@ Item {
 		readonly property bool waitForCompletion: plasmoid.configuration.waitForCompletion
 		readonly property int interval: Math.max(0, plasmoid.configuration.interval)
 		readonly property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		readonly property string tooltipCommand: plasmoid.configuration.tooltipCommand || ''
 		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
 		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
@@ -57,6 +58,7 @@ Item {
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
 		onCommandChanged: widget.runCommand()
+		onTooltipCommandChanged: widget.runCommand()
 		onIntervalChanged: {
 			// interval=0 stops the timer even with Timer.repeat=true, so we may
 			// need to restart the timer. Might as well restart the interval too.
@@ -185,10 +187,12 @@ Item {
 	}
 
 	property string outputText: ''
+	property string tooltipText: ''
+
 	Connections {
 		target: executable
 		onExited: {
-			if (cmd == config.command) {
+			if ((cmd == config.command) || (cmd == config.tooltipCommand)) {
 				var formattedText = stdout
 
 				// Newlines
@@ -221,7 +225,12 @@ Item {
 
 				// console.log('[commandoutput]', 'stdout', JSON.stringify(stdout))
 				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
-				widget.outputText = formattedText
+
+				if (cmd == config.command) {
+					widget.outputText = formattedText
+				} else if (cmd == config.tooltipCommand) {
+					widget.tooltipText = formattedText
+				}
 
 				if (config.waitForCompletion) {
 					timer.restart()
@@ -233,6 +242,7 @@ Item {
 	function runCommand() {
 		// console.log('[commandoutput]', Date.now(), 'runCommand', config.command)
 		executable.exec(config.command)
+		executable.exec(config.tooltipCommand)
 	}
 
 	Timer {
@@ -326,16 +336,16 @@ Item {
 			}
 		}
 
-		PlasmaCore.ToolTipArea {
-			anchors.fill: parent
-			subText: output.text
-			enabled: output.truncated
-		}
-
 		Text {
 			id: output
 			width: parent.width
 			height: parent.height
+
+			PlasmaCore.ToolTipArea {
+				anchors.fill: parent
+				mainText: widget.tooltipText
+				enabled: widget.tooltipText
+			}
 
 			text: widget.outputText
 

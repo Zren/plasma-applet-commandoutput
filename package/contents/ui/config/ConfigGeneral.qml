@@ -12,6 +12,7 @@ ConfigPage {
 	showAppletVersion: true
 	
 	property alias cfg_command: command.text
+	property alias cfg_tooltipCommand: tooltipCommand.text
 	property alias cfg_waitForCompletion: waitForCompletion.checked
 	property alias cfg_interval: interval.value
 	property alias cfg_clickCommand: clickCommand.text
@@ -24,6 +25,17 @@ ConfigPage {
 		TextField {
 			id: command
 			Layout.fillWidth: true
+		}
+
+		RowLayout {
+			Label {
+				text: i18n("Tooltip command")
+			}
+
+			TextField {
+				id: tooltipCommand
+				Layout.fillWidth: true
+			}
 		}
 
 		RowLayout {
