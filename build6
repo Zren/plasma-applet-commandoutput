@@ -2,9 +2,9 @@
 # Version 13
 
 ### User Variables
-qtMinVer="5.12"
-kfMinVer="5.68"
-plasmaMinVer="5.18"
+qtMinVer="6.6"
+kfMinVer="6"
+plasmaMinVer="6"
 filenameTag="-plasma${plasmaMinVer}"
 
 
@@ -34,23 +34,23 @@ fi
 
 
 ### Variables
-packageNamespace=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Name"`
+packageNamespace=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Name"`
 packageName="${packageNamespace##*.}" # Strip namespace (Eg: "org.kde.plasma.")
-packageVersion=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Version"`
-packageAuthor=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Author"`
-packageAuthorEmail=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Email"`
-packageWebsite=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Website"`
-packageComment=`kreadconfig5 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="Comment"`
+packageVersion=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Version"`
+packageAuthor=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Author"`
+packageAuthorEmail=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Email"`
+packageWebsite=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Website"`
+packageComment=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="Comment"`
 
-### metadata.desktop => metadata.json
-if command -v desktoptojson &> /dev/null ; then
-	genOutput=`desktoptojson --serviceType="plasma-applet.desktop" -i "$PWD/package/metadata.desktop" -o "$PWD/package/metadata.json"`
-	if [ "$?" != "0" ]; then
-		exit 1
-	fi
-	# Tabify metadata.json
-	sed -i '{s/ \{4\}/\t/g}' "$PWD/package/metadata.json"
-fi
+# ### metadata.desktop => metadata.json
+# if command -v desktoptojson &> /dev/null ; then
+# 	genOutput=`desktoptojson --serviceType="plasma-applet.desktop" -i "$PWD/package/metadata.desktop" -o "$PWD/package/metadata.json"`
+# 	if [ "$?" != "0" ]; then
+# 		exit 1
+# 	fi
+# 	# Tabify metadata.json
+# 	sed -i '{s/ \{4\}/\t/g}' "$PWD/package/metadata.json"
+# fi
 
 
 ### *.plasmoid

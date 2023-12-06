@@ -4,11 +4,11 @@ With KDE Frameworks v5.37 and above, translations are bundled with the `*.plasmo
 
 ## Install Translations
 
-Go to `~/.local/share/plasma/plasmoids/com.github.zren.commandoutput/translate/` and run `sh ./build --restartplasma`.
+Go to `~/.local/share/plasma/plasmoids/com.github.aricaldeira.commandoutput/translate/` and run `sh ./build --restartplasma`.
 
 ## New Translations
 
-1. Fill out [`template.pot`](template.pot) with your translations then open a [new issue](https://github.com/Zren/plasma-applet-commandoutput/issues/new), name the file `spanish.txt`, attach the txt file to the issue (drag and drop).
+1. Fill out [`template.pot`](template.pot) with your translations then open a [new issue](https://github.com/aricaldeira/plasma-applet-commandoutput/issues/new), name the file `spanish.txt`, attach the txt file to the issue (drag and drop).
 
 Or if you know how to make a pull request
 
@@ -35,8 +35,8 @@ Or if you know how to make a pull request
 ## Status
 |  Locale  |  Lines  | % Done|
 |----------|---------|-------|
-| Template |      26 |       |
-| bz       |   26/26 |  100% |
-| fr       |   25/26 |   96% |
-| nl       |   25/26 |   96% |
-| pt_br    |   26/26 |  100% |
+| Template |      25 |       |
+| bz       |   25/25 |  100% |
+| fr       |   24/25 |   96% |
+| nl       |   24/25 |   96% |
+| pt_br    |   25/25 |  100% |

@@ -4,17 +4,19 @@ Comment=Run a command periodically and render its output.
 
 Type=Service
 Icon=utilities-terminal
-X-KDE-ServiceTypes=Plasma/Applet
-
+KPackageStructure=Plasma/Applet
 X-Plasma-API=declarativeappletscript
-X-Plasma-MainScript=ui/main.qml
+
+X-Plasma-API-Minimum-Version=6.0
 
 X-KDE-PluginInfo-Author=Chris Holland
 X-KDE-PluginInfo-Email=zrenfire@gmail.com
+X-KDE-PluginInfo-Author=Ari Caldeira
+X-KDE-PluginInfo-Email=aricaldeira@gmail.com
 X-KDE-PluginInfo-License=GPL-2.0+
-X-KDE-PluginInfo-Name=com.github.zren.commandoutput
-X-KDE-PluginInfo-Version=12
-X-KDE-PluginInfo-Website=https://github.com/Zren/plasma-applet-commandoutput
+X-KDE-PluginInfo-Name=com.github.aricaldeira.commandoutput
+X-KDE-PluginInfo-Version=13
+X-KDE-PluginInfo-Website=https://github.com/aricaldeira/plasma-applet-commandoutput
 X-KDE-PluginInfo-Category=System Information
 
 Name[bz]=Saida di Komandus

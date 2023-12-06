@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput \n"
-"Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2023-11-03 08:28-0300\n"
+"Report-Msgid-Bugs-To: https://github.com/aricaldeira/plasma-applet-commandoutput\n"
+"POT-Creation-Date: 2023-12-06 18:06-0300\n"
 "PO-Revision-Date: 2020-10-05 21:55+020\n"
 "Last-Translator: Arí KAWDERA <aricaldeira@gmail.com>\n"
 "Language-Team: \n"
@@ -25,91 +25,87 @@ msgstr "Saida di Komandus"
 msgid "Run a command periodically and render its output."
 msgstr "Ezekuta un komandu a kada X milisegundus, i mòstra a saida/rezuwtadu"
 
-#: ../contents/config/config.qml
-msgid "General"
-msgstr "Jeraw"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Command"
 msgstr "Komandu"
 
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Tooltip command"
-msgstr "Komandu pra pasajen du mawzi"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Run every "
-msgstr "Rodar a kada "
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Wait for completion"
-msgstr "Esperar a ezekusawn terminar"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Font"
 msgstr "Fonti"
 
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Font Family:"
-msgstr "Familya:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Font Size:"
-msgstr "Tamaỹu:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "px"
-msgstr "px"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Colors"
 msgstr "Koris"
 
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Text:"
-msgstr "Testu:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Outline:"
-msgstr "Kontornu:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Misc"
 msgstr "Divèrsus"
 
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Desktop Widget: Show background"
-msgstr "Widigèti pru dèskitòpi: nuwn dexar transparenti"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Fixed Width:"
-msgstr "Largura fiksa:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Fixed Height:"
-msgstr "Awtura fiksa:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Replace all newlines with spaces"
-msgstr "Junta as liỹas numa liỹa sò, separandu kun espasus"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Click"
 msgstr "Kliki"
 
-#: ../contents/ui/config/ConfigGeneral.qml
-msgid "Run Command:"
-msgstr "Rodar u komandu:"
-
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Mouse Wheel"
 msgstr "Rodiỹa du mawzi"
 
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Tooltip command"
+msgstr "Komandu pra pasajen du mawzi"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Run every "
+msgstr "Rodar a kada "
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Wait for completion"
+msgstr "Esperar a ezekusawn terminar"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Font Family:"
+msgstr "Familya:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Font Size:"
+msgstr "Tamaỹu:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "px"
+msgstr "px"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Text:"
+msgstr "Testu:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Outline:"
+msgstr "Kontornu:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Desktop Widget: Show background"
+msgstr "Widigèti pru dèskitòpi: nuwn dexar transparenti"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Fixed Width:"
+msgstr "Largura fiksa:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Fixed Height:"
+msgstr "Awtura fiksa:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Replace all newlines with spaces"
+msgstr "Junta as liỹas numa liỹa sò, separandu kun espasus"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+msgid "Run Command:"
+msgstr "Rodar u komandu:"
+
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Scroll Up:"
 msgstr "Rolar pra sima:"
 
-#: ../contents/ui/config/ConfigGeneral.qml
+#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
 msgid "Scroll Down:"
 msgstr "Rolar pra baxu:"
 
@@ -121,3 +117,6 @@ msgstr "<b>Versawn:</b> %1"
 msgctxt "Use default font"
 msgid "Default"
 msgstr "Padrawn"
+
+#~ msgid "General"
+#~ msgstr "Jeraw"

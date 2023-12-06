@@ -1,0 +1,34 @@
+#!/bin/bash
+# Version 3
+
+# This script detects if the widget is already installed.
+# If it is, it will use --upgrade instead and restart plasmashell.
+
+packageNamespace=`kreadconfig6 --file="$PWD/package/metadata.desktop" --group="Desktop Entry" --key="X-KDE-PluginInfo-Name"`
+restartPlasmashell=false
+
+for arg in "$@"; do
+	case "$arg" in
+		-r) restartPlasmashell=true;;
+		--restart) restartPlasmashell=true;;
+		*) ;;
+	esac
+done
+
+isAlreadyInstalled=false
+kpackagetool6 --type="Plasma/Applet" --show="$packageNamespace" &> /dev/null
+if [ $? == 0 ]; then
+	isAlreadyInstalled=true
+fi
+
+if $isAlreadyInstalled; then
+	kpackagetool6 -t Plasma/Applet -u package
+	restartPlasmashell=true
+else
+	kpackagetool6 -t Plasma/Applet -i package
+fi
+
+if $restartPlasmashell; then
+	killall plasmashell
+	kstart plasmashell
+fi
