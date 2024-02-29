@@ -7,10 +7,8 @@ RowLayout {
 
 	property string configKey: ''
 	property alias decimals: spinBox.decimals
-	property alias horizontalAlignment: spinBox.horizontalAlignment
 	property alias maximumValue: spinBox.to
 	property alias minimumValue: spinBox.from
-	property alias prefix: spinBox.prefix
 	property alias stepSize: spinBox.stepSize
 	property alias suffix: spinBox.suffix
 	property alias value: spinBox.value
