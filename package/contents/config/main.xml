@@ -19,7 +19,7 @@
 			<default>false</default>
 		</entry>
 		<entry name="fontSize" type="int">
-			<default>16</default>
+			<default>13</default>
 		</entry>
 		<entry name="fontFamily" type="string">
 			<default></default>

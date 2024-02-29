@@ -376,8 +376,7 @@ PlasmoidItem {
 			linkColor: theme.linkColor
 			onLinkActivated: Qt.openUrlExternally(link)
 
-			font.pointSize: -1
-			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
+			font.pointSize: plasmoid.configuration.fontSize
 			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			font.italic: plasmoid.configuration.italic
