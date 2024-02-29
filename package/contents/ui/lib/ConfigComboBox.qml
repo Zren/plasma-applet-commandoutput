@@ -25,7 +25,7 @@ RowLayout {
 	readonly property string configValue: configKey ? plasmoid.configuration[configKey] : ""
 	onConfigValueChanged: {
 		if (!comboBox.focus && value != configValue) {
-			setValue(configValue)
+			selectValue(configValue)
 		}
 	}
 
@@ -38,15 +38,6 @@ RowLayout {
 
 	signal populate()
 	property bool populated: false
-
-	function setValue(newValue) {
-		for (var i = 0; i < comboBox.model.length; i++) {
-			if (comboBox.model[i][valueRole] == newValue) {
-				comboBox.currentIndex = i
-				break
-			}
-		}
-	}
 
 	Label {
 		id: labelBefore
