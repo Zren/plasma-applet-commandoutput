@@ -50,7 +50,7 @@ PlasmoidItem {
 		readonly property bool active: !!command
 		readonly property bool waitForCompletion: plasmoid.configuration.waitForCompletion
 		readonly property int interval: Math.max(0, plasmoid.configuration.interval)
-		readonly property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		readonly property string command: plasmoid.configuration.command || ''
 		readonly property string tooltipCommand: plasmoid.configuration.tooltipCommand || ''
 		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
