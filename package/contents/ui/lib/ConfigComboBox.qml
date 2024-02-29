@@ -57,6 +57,7 @@ RowLayout {
 	ComboBox {
 		id: comboBox
 		textRole: "text" // Doesn't autodeduce from model if we manually populate it
+		valueRole: "value"
 
 		model: []
 
