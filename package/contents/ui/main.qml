@@ -373,4 +373,21 @@ Item {
 
 	}
 
+	TextEdit {
+		id: copyable
+		visible: false
+	}
+
+	Plasmoid.contextualActions: [
+		PlasmaCore.Action {
+			text: i18nc("@action", "Copy command output to clipboard")
+			icon.name: "edit-copy"
+			onTriggered: {
+				copyable.text = outputText
+				copyable.selectAll()
+				copyable.copy()
+			}
+		}
+	]
+
 }
