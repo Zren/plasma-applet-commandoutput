@@ -38,28 +38,28 @@ RowLayout {
 	
 	Button {
 		id: justifyLeftButton
-		iconName: "format-justify-left-symbolic"
+		icon.name: "format-justify-left-symbolic"
 		checkable: true
 		onClicked: setValue(Text.AlignLeft)
 	}
 
 	Button {
 		id: justifyCenterButton
-		iconName: "format-justify-center-symbolic"
+		icon.name: "format-justify-center-symbolic"
 		checkable: true
 		onClicked: setValue(Text.AlignHCenter)
 	}
 
 	Button {
 		id: justifyRightButton
-		iconName: "format-justify-right-symbolic"
+		icon.name: "format-justify-right-symbolic"
 		checkable: true
 		onClicked: setValue(Text.AlignRight)
 	}
 
 	Button {
 		id: justifyFillButton
-		iconName: "format-justify-fill-symbolic"
+		icon.name: "format-justify-fill-symbolic"
 		checkable: true
 		onClicked: setValue(Text.AlignJustify)
 	}
