@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput \n"
 "Report-Msgid-Bugs-To: https://github.com/aricaldeira/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2023-12-06 18:06-0300\n"
+"POT-Creation-Date: 2024-03-05 12:12-0300\n"
 "PO-Revision-Date: 2020-10-05 21:55+020\n"
 "Last-Translator: Gilles MOREL <contact@gilles-morel.fr>\n"
 "Language-Team: \n"
@@ -25,89 +25,105 @@ msgstr "Command Output"
 msgid "Run a command periodically and render its output."
 msgstr "Exécute une commande périodiquement et affiche son retour."
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+#: ../contents/config/config.qml ../contents/ui/config/ConfigCommand.qml
 msgid "Command"
 msgstr "Commande"
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Font"
-msgstr "Police"
+#: ../contents/config/config.qml
+msgid "Appearance"
+msgstr ""
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Colors"
-msgstr "Couleurs"
+#: ../contents/config/config.qml
+msgid "Actions"
+msgstr ""
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Misc"
-msgstr "Divers"
+#: ../contents/ui/config/ConfigActions.qml
+msgid "Mouse Click"
+msgstr ""
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Click"
-msgstr "Clic"
+#: ../contents/ui/config/ConfigActions.qml
+msgid "Command:"
+msgstr ""
 
-#: ../contents/config/config.qml ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+#: ../contents/ui/config/ConfigActions.qml
 msgid "Mouse Wheel"
 msgstr "Roulette de souris"
 
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Tooltip command"
-msgstr ""
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Run every "
-msgstr "Exécuter toutes les "
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigCommand.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Wait for completion"
-msgstr "Attendre la fin de l'éxécution"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Font Family:"
-msgstr "Famille :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Font Size:"
-msgstr "Taille :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "px"
-msgstr "px"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Text:"
-msgstr "Texte :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Outline:"
-msgstr "Contours :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Desktop Widget: Show background"
-msgstr "Pour le widget de bureau : afficher un fond"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Fixed Width:"
-msgstr "Largeur fixe :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Fixed Height:"
-msgstr "Hauteur fixée :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Replace all newlines with spaces"
-msgstr "Remplacer les sauts de lignes par des espaces"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
-msgid "Run Command:"
-msgstr "Lancer la commande :"
-
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+#: ../contents/ui/config/ConfigActions.qml
 msgid "Scroll Up:"
 msgstr "Défilement vers le haut :"
 
-#: ../contents/ui/config/ConfigClick.qml ../contents/ui/config/ConfigColors.qml ../contents/ui/config/ConfigFont.qml ../contents/ui/config/ConfigGeneral.qml ../contents/ui/config/ConfigMisc.qml ../contents/ui/config/ConfigMouseWheel.qml
+#: ../contents/ui/config/ConfigActions.qml
 msgid "Scroll Down:"
 msgstr "Défilement vers le bas :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font"
+msgstr "Police"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font Family:"
+msgstr "Famille :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Font Size:"
+msgstr "Taille :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "pt"
+msgstr ""
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Colors"
+msgstr "Couleurs"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Text:"
+msgstr "Texte :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Outline:"
+msgstr "Contours :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Desktop Widget: Show background"
+msgstr "Pour le widget de bureau : afficher un fond"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Fixed Width:"
+msgstr "Largeur fixe :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "px"
+msgstr "px"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Fixed Height:"
+msgstr "Hauteur fixée :"
+
+#: ../contents/ui/config/ConfigAppearance.qml
+msgid "Replace all newlines with spaces"
+msgstr "Remplacer les sauts de lignes par des espaces"
+
+#: ../contents/ui/config/ConfigCommand.qml
+msgid "Tooltip Command"
+msgstr ""
+
+#: ../contents/ui/config/ConfigCommand.qml
+msgid "Run"
+msgstr ""
+
+#: ../contents/ui/config/ConfigCommand.qml
+msgid "Run every "
+msgstr "Exécuter toutes les "
+
+#: ../contents/ui/config/ConfigCommand.qml
+msgid " ms"
+msgstr ""
+
+#: ../contents/ui/config/ConfigCommand.qml
+msgid "Wait for completion"
+msgstr "Attendre la fin de l'éxécution"
 
 #: ../contents/ui/lib/AppletVersion.qml
 msgid "<b>Version:</b> %1"
@@ -117,6 +133,15 @@ msgstr "<b>Version :</b> %1"
 msgctxt "Use default font"
 msgid "Default"
 msgstr "Par défaut"
+
+#~ msgid "Misc"
+#~ msgstr "Divers"
+
+#~ msgid "Click"
+#~ msgstr "Clic"
+
+#~ msgid "Run Command:"
+#~ msgstr "Lancer la commande :"
 
 #~ msgid "General"
 #~ msgstr "Général"
