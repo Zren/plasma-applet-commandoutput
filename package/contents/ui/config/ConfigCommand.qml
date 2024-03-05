@@ -53,8 +53,11 @@ KCM.SimpleKCM {
 				stepSize: 500
 				to: 2000000000 // Close enough.
 				textFromValue: function(value, locale) {
-					return qsTr("%1 ms").arg(value);
+					return qsTr("%1").arg(value);
 				}
+			}
+			Label {
+				text: i18n(" ms")
 			}
 		}
 

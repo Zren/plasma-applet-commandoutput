@@ -33,7 +33,7 @@ KCM.SimpleKCM {
 		id: page
 
 		Kirigami.Separator {
-			Kirigami.FormData.label: "Font"
+			Kirigami.FormData.label: i18n("Font")
 			Kirigami.FormData.isSection: true
 		}
 		
@@ -56,7 +56,7 @@ KCM.SimpleKCM {
 		}
 		
 		Kirigami.Separator {
-			Kirigami.FormData.label: "Colors"
+			Kirigami.FormData.label: i18n("Colors")
 			Kirigami.FormData.isSection: true
 		}
 		

@@ -18,7 +18,7 @@ KCM.SimpleKCM {
 		id: page
 
 		Kirigami.Separator {
-			Kirigami.FormData.label: "Mouse Click"
+			Kirigami.FormData.label: i18n("Mouse Click")
 			Kirigami.FormData.isSection: true
 		}
 		
@@ -33,7 +33,7 @@ KCM.SimpleKCM {
 		}
 		
 		Kirigami.Separator {
-			Kirigami.FormData.label: "Mouse Wheel"
+			Kirigami.FormData.label: i18n("Mouse Wheel")
 			Kirigami.FormData.isSection: true
 		}
 		
