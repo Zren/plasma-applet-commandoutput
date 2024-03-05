@@ -13,13 +13,14 @@
 			<!-- <default>SYSTEMD_COLORS=1 journalctl -q -b0 -n20</default> -->
 		</entry>
 		<entry name="tooltipCommand" type="string">
-			<default>echo "Tooltip test $(date +%S)"</default>
+			<default></default>
+			<!-- <default>echo "Tooltip test $(date +%S)"</default> -->
 		</entry>
 		<entry name="waitForCompletion" type="bool">
 			<default>false</default>
 		</entry>
 		<entry name="fontSize" type="int">
-			<default>16</default>
+			<default>13</default>
 		</entry>
 		<entry name="fontFamily" type="string">
 			<default></default>

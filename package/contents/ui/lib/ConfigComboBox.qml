@@ -21,11 +21,11 @@ RowLayout {
 
 	property string configKey: ''
 	readonly property var currentItem: comboBox.model[comboBox.currentIndex]
-	readonly property string value: currentItem ? currentItem[valueRole] : ""
+	readonly property string value: comboBox.currentIndex >= 0 && currentItem[valueRole] ? currentItem[valueRole] : ""
 	readonly property string configValue: configKey ? plasmoid.configuration[configKey] : ""
 	onConfigValueChanged: {
 		if (!comboBox.focus && value != configValue) {
-			setValue(configValue)
+			selectValue(configValue)
 		}
 	}
 
@@ -39,15 +39,6 @@ RowLayout {
 	signal populate()
 	property bool populated: false
 
-	function setValue(newValue) {
-		for (var i = 0; i < comboBox.model.length; i++) {
-			if (comboBox.model[i][valueRole] == newValue) {
-				comboBox.currentIndex = i
-				break
-			}
-		}
-	}
-
 	Label {
 		id: labelBefore
 		text: ""
@@ -57,7 +48,7 @@ RowLayout {
 	ComboBox {
 		id: comboBox
 		textRole: "text" // Doesn't autodeduce from model if we manually populate it
-		property string valueRole: "value"
+		valueRole: "value"
 
 		model: []
 

@@ -37,21 +37,21 @@ RowLayout {
 	
 	Button {
 		id: vertTopButton
-		iconName: "align-vertical-top"
+		icon.name: "align-vertical-top"
 		checkable: true
 		onClicked: setValue(Text.AlignTop)
 	}
 
 	Button {
 		id: vertCenterButton
-		iconName: "align-vertical-center"
+		icon.name: "align-vertical-center"
 		checkable: true
 		onClicked: setValue(Text.AlignVCenter)
 	}
 
 	Button {
 		id: vertBottomButton
-		iconName: "align-vertical-bottom"
+		icon.name: "align-vertical-bottom"
 		checkable: true
 		onClicked: setValue(Text.AlignBottom)
 	}

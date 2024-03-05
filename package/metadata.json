@@ -1,0 +1,38 @@
+{
+	"KPlugin": {
+		"Authors": [
+			{
+				"Email": "zrenfire@gmail.com",
+				"Name": "Chris Holland"
+			},
+			{
+				"Email": "aricaldeira@gmail.com",
+				"Name": "Ari Caldeira"
+			},
+			{
+				"Email": "oded@geek.co.il",
+				"Name": "Oded Arbel"
+			}
+		],
+		"Category": "System Information",
+		"Description": "Run a command periodically and render its output.",
+		"Description[bz]": "Ezekuta un komandu a kada X milisegundus, i mòstra a saida/rezuwtadu.",
+		"Description[fr]": "Exécute une commande périodiquement et affiche son retour.",
+		"Description[nl]": "Voer een opdracht periodiek uit en toon de uitvoer ervan.",
+		"Description[pt_br]": "Executa um comando a cada X milissegundos, e mostra a saída/resultado.",
+		"Icon": "utilities-terminal",
+		"Id": "com.github.aricaldeira.commandoutput",
+		"License": "GPL-2.0+",
+		"Name": "Command Output",
+		"Name[bz]": "Saida di Komandus",
+		"Name[fr]": "Command Output",
+		"Name[nl]": "Opdrachtuitvoer",
+		"Name[pt_br]": "Saída de Comandos",
+		"ServiceTypes": [
+			"Plasma/Applet"
+		],
+		"Version": "14",
+		"Website": "https://github.com/aricaldeira/plasma-applet-commandoutput"
+	},
+	"X-Plasma-API-Minimum-Version": "6.0"
+}

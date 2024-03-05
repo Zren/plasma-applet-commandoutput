@@ -1,5 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponent
@@ -50,7 +52,7 @@ PlasmoidItem {
 		readonly property bool active: !!command
 		readonly property bool waitForCompletion: plasmoid.configuration.waitForCompletion
 		readonly property int interval: Math.max(0, plasmoid.configuration.interval)
-		readonly property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		readonly property string command: plasmoid.configuration.command || ''
 		readonly property string tooltipCommand: plasmoid.configuration.tooltipCommand || ''
 		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
@@ -298,7 +300,7 @@ PlasmoidItem {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentWidth)
 			} else if (isHorizontal && plasmoid.configuration.useFixedWidth) {
-				return plasmoid.configuration.fixedWidth * units.devicePixelRatio
+				return plasmoid.configuration.fixedWidth * Kirigami.Units.devicePixelRatio
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitWidth)
 			}
@@ -313,7 +315,7 @@ PlasmoidItem {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentHeight)
 			} else if (isVertical && plasmoid.configuration.useFixedHeight) {
-				return plasmoid.configuration.fixedHeight * units.devicePixelRatio
+				return plasmoid.configuration.fixedHeight * Kirigami.Units.devicePixelRatio
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitHeight)
 			}
@@ -373,12 +375,11 @@ PlasmoidItem {
 			style: config.showOutline ? Text.Outline : Text.Normal
 			styleColor: config.outlineColor
 
-			linkColor: theme.linkColor
+			linkColor: Kirigami.Theme.linkColor
 			onLinkActivated: Qt.openUrlExternally(link)
 
-			font.pointSize: -1
-			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
-			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
+			font.pointSize: plasmoid.configuration.fontSize
+			font.family: plasmoid.configuration.fontFamily || Kirigami.Theme.defaultFont.family
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			font.italic: plasmoid.configuration.italic
 			font.underline: plasmoid.configuration.underline

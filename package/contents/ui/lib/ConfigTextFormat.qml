@@ -4,6 +4,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
+
 RowLayout {
 	id: configTextFormat
 
@@ -17,7 +20,7 @@ RowLayout {
 		id: configBold
 		property string configKey: ''
 		visible: configKey
-		iconName: 'format-text-bold-symbolic'
+		icon.name: 'format-text-bold-symbolic'
 		checkable: true
 		checked: configKey ? plasmoid.configuration[configKey] : false
 		onClicked: plasmoid.configuration[configKey] = checked
@@ -27,7 +30,7 @@ RowLayout {
 		id: configItalic
 		property string configKey: ''
 		visible: configKey
-		iconName: 'format-text-italic-symbolic'
+		icon.name: 'format-text-italic-symbolic'
 		checkable: true
 		checked: configKey ? plasmoid.configuration[configKey] : false
 		onClicked: plasmoid.configuration[configKey] = checked
@@ -37,14 +40,14 @@ RowLayout {
 		id: configUnderline
 		property string configKey: ''
 		visible: configKey
-		iconName: 'format-text-underline-symbolic'
+		icon.name: 'format-text-underline-symbolic'
 		checkable: true
 		checked: configKey ? plasmoid.configuration[configKey] : false
 		onClicked: plasmoid.configuration[configKey] = checked
 	}
 
 	Item {
-		Layout.preferredWidth: units.smallSpacing
+		Layout.preferredWidth: Kirigami.Units.smallSpacing
 		readonly property bool groupBeforeVisible: configBold.visible || configItalic.visible || configUnderline.visible
 		readonly property bool groupAfterVisible: configTextAlign.visible
 		visible: groupBeforeVisible && groupAfterVisible
@@ -56,7 +59,7 @@ RowLayout {
 	}
 
 	Item {
-		Layout.preferredWidth: units.smallSpacing
+		Layout.preferredWidth: Kirigami.Units.smallSpacing
 		readonly property bool groupBeforeVisible: configBold.visible || configItalic.visible || configUnderline.visible || configTextAlign.visible
 		readonly property bool groupAfterVisible: configVertAlign.visible
 		visible: groupBeforeVisible && groupAfterVisible
