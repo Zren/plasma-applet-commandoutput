@@ -1,0 +1,4 @@
+#!/bin/bash
+# Version 1
+
+kpackagetool6 -t Plasma/Applet -r package

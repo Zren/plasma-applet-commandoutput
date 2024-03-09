@@ -1,18 +1,21 @@
-import QtQuick 2.1
-import QtQuick.Layouts 1.0
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponent
+import QtQuick
+import QtQuick.Layouts
 
-Item {
-	id: widget
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponent
+import org.kde.plasma.plasma5support as Plasma5Support
+
+PlasmoidItem {
+	id: root
 
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.h
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.cpp
 	// https://github.com/KDE/plasma-framework/blob/master/src/declarativeimports/core/datasource.h
 	// https://github.com/KDE/plasma-framework/blob/master/src/declarativeimports/core/datasource.cpp
 	// https://github.com/KDE/plasma-framework/blob/master/src/plasma/scripting/dataenginescript.cpp
-	PlasmaCore.DataSource {
+	Plasma5Support.DataSource {
 		id: executable
 		engine: "executable"
 		connectedSources: []
@@ -49,14 +52,16 @@ Item {
 		readonly property bool active: !!command
 		readonly property bool waitForCompletion: plasmoid.configuration.waitForCompletion
 		readonly property int interval: Math.max(0, plasmoid.configuration.interval)
-		readonly property string command: plasmoid.configuration.command || 'sleep 2 && echo "Test: $(date +%s)"'
+		readonly property string command: plasmoid.configuration.command || ''
+		readonly property string tooltipCommand: plasmoid.configuration.tooltipCommand || ''
 		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
 		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
-		onCommandChanged: widget.runCommand()
+		onCommandChanged: root.runCommand()
+		onTooltipCommandChanged: root.runCommand()
 		onIntervalChanged: {
 			// interval=0 stops the timer even with Timer.repeat=true, so we may
 			// need to restart the timer. Might as well restart the interval too.
@@ -73,24 +78,6 @@ Item {
 	}
 
 	// https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-	property var ansiColors: ({
-		30: '#000000', // Black
-		31: '#aa0000', // Red
-		32: '#00aa00', // Green
-		33: '#aa6500', // Yellow
-		34: '#0000aa', // Blue
-		35: '#aa00aa', // Magenta
-		36: '#00aaaa', // Cyan
-		37: '#aaaaaa', // White
-		90: '#656565', // Bright Black
-		91: '#ff6565', // Bright Red
-		92: '#65ff65', // Bright Green
-		93: '#ffff65', // Bright Yellow
-		94: '#6565ff', // Bright Blue
-		95: '#ff65ff', // Bright Magenta
-		96: '#65ffff', // Bright Cyan
-		97: '#ffffff', // Bright White
-	})
 	function resetState(state) {
 		var out = state.closeTags.join(' ')
 		state.bold = false
@@ -98,6 +85,25 @@ Item {
 		return out
 	}
 	function parseAnsiCode(n, i, tokens, state) {
+		var ansiColors = ({
+			30: '#000000', // Black
+			31: '#aa0000', // Red
+			32: '#00aa00', // Green
+			33: '#aa6500', // Yellow
+			34: '#0000aa', // Blue
+			35: '#aa00aa', // Magenta
+			36: '#00aaaa', // Cyan
+			37: '#aaaaaa', // White
+			90: '#656565', // Bright Black
+			91: '#ff6565', // Bright Red
+			92: '#65ff65', // Bright Green
+			93: '#ffff65', // Bright Yellow
+			94: '#6565ff', // Bright Blue
+			95: '#ff65ff', // Bright Magenta
+			96: '#65ffff', // Bright Cyan
+			97: '#ffffff', // Bright White
+		})
+
 		if (n == 0) { // Reset
 			return resetState(state)
 		} else if (n == 1) {
@@ -131,6 +137,25 @@ Item {
 		return '#' + formatHexInt(r) + formatHexInt(g) + formatHexInt(b)
 	}
 	function parseColorMode(i, tokens) {
+		var ansiColors = ({
+			30: '#000000', // Black
+			31: '#aa0000', // Red
+			32: '#00aa00', // Green
+			33: '#aa6500', // Yellow
+			34: '#0000aa', // Blue
+			35: '#aa00aa', // Magenta
+			36: '#00aaaa', // Cyan
+			37: '#aaaaaa', // White
+			90: '#656565', // Bright Black
+			91: '#ff6565', // Bright Red
+			92: '#65ff65', // Bright Green
+			93: '#ffff65', // Bright Yellow
+			94: '#6565ff', // Bright Blue
+			95: '#ff65ff', // Bright Magenta
+			96: '#65ffff', // Bright Cyan
+			97: '#ffffff', // Bright White
+		})
+
 		var colorMode = parseInt(tokens[++i], 10)
 		if (colorMode == 2) { // RGB
 			var r = parseInt(tokens[++i], 10)
@@ -185,10 +210,12 @@ Item {
 	}
 
 	property string outputText: ''
+	property string tooltipText: ''
+
 	Connections {
 		target: executable
 		onExited: {
-			if (cmd == config.command) {
+			if ((cmd == config.command) || (cmd == config.tooltipCommand)) {
 				var formattedText = stdout
 
 				// Newlines
@@ -221,7 +248,12 @@ Item {
 
 				// console.log('[commandoutput]', 'stdout', JSON.stringify(stdout))
 				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
-				widget.outputText = formattedText
+
+				if (cmd == config.command) {
+					root.outputText = formattedText
+				} else if (cmd == config.tooltipCommand) {
+					root.tooltipText = formattedText
+				}
 
 				if (config.waitForCompletion) {
 					timer.restart()
@@ -233,6 +265,7 @@ Item {
 	function runCommand() {
 		// console.log('[commandoutput]', Date.now(), 'runCommand', config.command)
 		executable.exec(config.command)
+		executable.exec(config.tooltipCommand)
 	}
 
 	Timer {
@@ -240,7 +273,7 @@ Item {
 		interval: config.interval
 		running: true
 		repeat: !config.waitForCompletion
-		onTriggered: widget.runCommand()
+		onTriggered: root.runCommand()
 		// onIntervalChanged: console.log('interval', interval)
 		// onRunningChanged: console.log('running', running)
 		// onRepeatChanged: console.log('repeat', repeat)
@@ -251,12 +284,11 @@ Item {
 		}
 	}
 
-	Plasmoid.onActivated: widget.performClick()
+	Plasmoid.onActivated: root.performClick()
 
 	Plasmoid.backgroundHints: plasmoid.configuration.showBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
 
-	Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
-	Plasmoid.fullRepresentation: Item {
+	fullRepresentation: Item {
 		id: panelItem
 
 		readonly property bool isHorizontal: plasmoid.formFactor == PlasmaCore.Types.Horizontal
@@ -268,30 +300,30 @@ Item {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentWidth)
 			} else if (isHorizontal && plasmoid.configuration.useFixedWidth) {
-				return plasmoid.configuration.fixedWidth * units.devicePixelRatio
+				return plasmoid.configuration.fixedWidth * Kirigami.Units.devicePixelRatio
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitWidth)
 			}
 		}
 		Layout.minimumWidth: isHorizontal ? itemWidth : -1
 		Layout.fillWidth: isVertical
-		Layout.preferredWidth: itemWidth // Panel widget default
-		// width: itemWidth // Desktop widget default
+		Layout.preferredWidth: itemWidth // Panel root default
+		// width: itemWidth // Desktop root default
 		// onItemWidthChanged: console.log('itemWidth', itemWidth, 'implicitWidth', output.implicitWidth, 'contentWidth', output.contentWidth)
 
 		readonly property int itemHeight: {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentHeight)
 			} else if (isVertical && plasmoid.configuration.useFixedHeight) {
-				return plasmoid.configuration.fixedHeight * units.devicePixelRatio
+				return plasmoid.configuration.fixedHeight * Kirigami.Units.devicePixelRatio
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitHeight)
 			}
 		}
 		Layout.minimumHeight: isVertical ? itemHeight : -1
 		Layout.fillHeight: isHorizontal
-		Layout.preferredHeight: itemHeight // Panel widget default
-		// height: itemHeight // Desktop widget default
+		Layout.preferredHeight: itemHeight // Panel root default
+		// height: itemHeight // Desktop root default
 		// onItemHeightChanged: console.log('itemHeight', itemHeight, 'implicitHeight', output.implicitHeight, 'contentHeight', output.contentHeight)
 
 
@@ -305,7 +337,7 @@ Item {
 			cursorShape: output.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
 
 			onClicked: {
-				widget.performClick()
+				root.performClick()
 			}
 
 			property int wheelDelta: 0
@@ -316,20 +348,14 @@ Item {
 				// See: http://qt-project.org/doc/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
 				while (wheelDelta >= 120) {
 					wheelDelta -= 120
-					widget.performMouseWheelUp()
+					root.performMouseWheelUp()
 				}
 				while (wheelDelta <= -120) {
 					wheelDelta += 120
-					widget.performMouseWheelDown()
+					root.performMouseWheelDown()
 				}
 				wheel.accepted = true
 			}
-		}
-
-		PlasmaCore.ToolTipArea {
-			anchors.fill: parent
-			subText: output.text
-			enabled: output.truncated
 		}
 
 		Text {
@@ -337,18 +363,23 @@ Item {
 			width: parent.width
 			height: parent.height
 
-			text: widget.outputText
+			PlasmaCore.ToolTipArea {
+				anchors.fill: parent
+				mainText: root.tooltipText
+				enabled: root.tooltipText
+			}
+
+			text: root.outputText
 
 			color: config.textColor
 			style: config.showOutline ? Text.Outline : Text.Normal
 			styleColor: config.outlineColor
 
-			linkColor: theme.linkColor
+			linkColor: Kirigami.Theme.linkColor
 			onLinkActivated: Qt.openUrlExternally(link)
 
-			font.pointSize: -1
-			font.pixelSize: plasmoid.configuration.fontSize * units.devicePixelRatio
-			font.family: plasmoid.configuration.fontFamily || theme.defaultFont.family
+			font.pointSize: plasmoid.configuration.fontSize
+			font.family: plasmoid.configuration.fontFamily || Kirigami.Theme.defaultFont.family
 			font.weight: plasmoid.configuration.bold ? Font.Bold : Font.Normal
 			font.italic: plasmoid.configuration.italic
 			font.underline: plasmoid.configuration.underline
@@ -373,4 +404,5 @@ Item {
 
 	}
 
+	preferredRepresentation: fullRepresentation
 }

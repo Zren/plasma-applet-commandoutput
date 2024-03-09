@@ -1,13 +1,13 @@
 // Version 2
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import QtQuick.Window
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
 
 import ".."
 
@@ -15,7 +15,7 @@ RowLayout {
 	id: configColor
 	spacing: 2
 	// Layout.fillWidth: true
-	Layout.maximumWidth: 300 * units.devicePixelRatio
+	Layout.maximumWidth: 300 * Screen.devicePixelRatio
 
 	property alias label: label.text
 	property alias horizontalAlignment: label.horizontalAlignment
@@ -75,7 +75,7 @@ RowLayout {
 			anchors.fill: parent
 			color: configColor.valueColor
 			border.width: 2
-			border.color: parent.containsMouse ? theme.highlightColor : "#BB000000"
+			border.color: parent.containsMouse ? Kirigami.Theme.highlightColor : "#BB000000"
 		}
 	}
 
@@ -100,9 +100,9 @@ RowLayout {
 		visible: false
 		modality: Qt.WindowModal
 		title: configColor.label
-		showAlphaChannel: true
-		color: configColor.valueColor
-		onCurrentColorChanged: {
+		options: ColorDialog.ShowAlphaChannel
+		selectedColor: configColor.valueColor
+		onAccepted: {
 			if (visible && color != currentColor) {
 				configColor.value = currentColor
 			}
