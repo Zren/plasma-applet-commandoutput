@@ -2,14 +2,14 @@
 	"KPackageStructure": "Plasma/Applet",
 	"KPlugin": {
 		"Authors": [
-                       {
-                               "Email": "zrenfire@gmail.com",
-                               "Name": "Chris Holland"
-                       },
-                       {
-                               "Email": "aricaldeira@gmail.com",
-                               "Name": "Ari Caldeira"
-                       },
+			{
+				"Email": "zrenfire@gmail.com",
+				"Name": "Chris Holland"
+			},
+			{
+				"Email": "aricaldeira@gmail.com",
+				"Name": "Ari Caldeira"
+			},
 			{
 				"Email": "oded@geek.co.il",
 				"Name": "Oded Arbel"
