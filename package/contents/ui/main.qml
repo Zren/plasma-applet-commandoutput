@@ -192,39 +192,44 @@ PlasmoidItem {
 	property string outputText: ''
 	property string tooltipText: ''
 
+	function formatOutputText(stdout) {
+		var formattedText = stdout
+
+		// Newlines
+		if (plasmoid.configuration.replaceAllNewlines) {
+			formattedText = formattedText.replace(/\n/g, ' ').trim()
+		} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
+			formattedText = formattedText.substr(0, formattedText.length-1)
+		}
+
+		// Terminal Colors (Issue #7)
+		var state = {
+			html: false,
+			bold: false,
+			closeTags: [],
+		}
+		formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)?m/g, function(match, p1, p2){
+			state.html = true
+			if (typeof p1 === 'string') {
+				return parseAnsiEscape(p1, state)
+			} else { // \033[m is Reset
+				return parseAnsiEscape('0', state)
+			}
+		})
+		formattedText += resetState(state)
+
+		// Format Newlines when in HTML mode
+		if (state.html) {
+			formattedText = formattedText.replace(/\n/g, '<br>')
+		}
+		return formattedText
+	}
+
 	Connections {
 		target: executable
 		onExited: {
 			if ((cmd == config.command) || (cmd == config.tooltipCommand)) {
-				var formattedText = stdout
-
-				// Newlines
-				if (plasmoid.configuration.replaceAllNewlines) {
-					formattedText = formattedText.replace(/\n/g, ' ').trim()
-				} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
-					formattedText = formattedText.substr(0, formattedText.length-1)
-				}
-
-				// Terminal Colors (Issue #7)
-				var state = {
-					html: false,
-					bold: false,
-					closeTags: [],
-				}
-				formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)?m/g, function(match, p1, p2){
-					state.html = true
-					if (typeof p1 === 'string') {
-						return parseAnsiEscape(p1, state)
-					} else { // \033[m is Reset
-						return parseAnsiEscape('0', state)
-					}
-				})
-				formattedText += resetState(state)
-
-				// Format Newlines when in HTML mode
-				if (state.html) {
-					formattedText = formattedText.replace(/\n/g, '<br>')
-				}
+				var formattedText = formatOutputText(stdout)
 
 				// console.log('[commandoutput]', 'stdout', JSON.stringify(stdout))
 				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
