@@ -3,8 +3,8 @@
 
 ### User Variables
 qtMinVer="6.6"
-kfMinVer="6"
-plasmaMinVer="6"
+kfMinVer="6.0"
+plasmaMinVer="6.0"
 filenameTag="-plasma${plasmaMinVer}"
 
 
