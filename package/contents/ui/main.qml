@@ -56,8 +56,8 @@ PlasmoidItem {
 		readonly property string tooltipCommand: plasmoid.configuration.tooltipCommand || ''
 		readonly property bool clickEnabled: !!plasmoid.configuration.clickCommand
 		readonly property bool mousewheelEnabled: (plasmoid.configuration.mousewheelUpCommand || plasmoid.configuration.mousewheelDownCommand)
-		readonly property color textColor: plasmoid.configuration.textColor || theme.textColor
-		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
+		readonly property color textColor: plasmoid.configuration.textColor || Kirigami.Theme.textColor
+		readonly property color outlineColor: plasmoid.configuration.outlineColor || Kirigami.Theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
 		onCommandChanged: widget.runCommand()
