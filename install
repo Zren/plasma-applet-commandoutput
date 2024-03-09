@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version 6
+# Version 7
 
 # This script detects if the widget is already installed.
 # If it is, it will use --upgrade instead and restart plasmashell.
@@ -38,7 +38,7 @@ fi
 if command -v kstart6 &> /dev/null ; then kstart="kstart6" # Plasma6
 elif command -v kstart5 &> /dev/null ; then kstart="kstart5" # Plasma5
 else
-	echo "[error] Could not find 'kpackagetool6'"
+	echo "[error] Could not find 'kstart5'"
 	exit 1
 fi
 restartPlasmashell=false
