@@ -22,7 +22,7 @@
 		"Description[nl]": "Voer een opdracht periodiek uit en toon de uitvoer ervan.",
 		"Description[pt_br]": "Executa um comando a cada X milissegundos, e mostra a saída/resultado",
 		"Icon": "utilities-terminal",
-		"Id": "com.github.aricaldeira.commandoutput",
+		"Id": "com.github.zren.commandoutput",
 		"License": "GPL-2.0+",
 		"Name": "Command Output",
 		"Name[bz]": "Saida di Komandus",
@@ -30,7 +30,7 @@
 		"Name[nl]": "Opdrachtuitvoer",
 		"Name[pt_br]": "Saída de Comandos",
 		"Version": "13",
-		"Website": "https://github.com/aricaldeira/plasma-applet-commandoutput"
+		"Website": "https://github.com/Zren/plasma-applet-commandoutput"
 	},
 	"X-Plasma-API": "declarativeappletscript",
 	"X-Plasma-API-Minimum-Version": "6.0"
