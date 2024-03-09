@@ -78,6 +78,24 @@ PlasmoidItem {
 	}
 
 	// https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+	property var ansiColors: ({
+		30: '#000000', // Black
+		31: '#aa0000', // Red
+		32: '#00aa00', // Green
+		33: '#aa6500', // Yellow
+		34: '#0000aa', // Blue
+		35: '#aa00aa', // Magenta
+		36: '#00aaaa', // Cyan
+		37: '#aaaaaa', // White
+		90: '#656565', // Bright Black
+		91: '#ff6565', // Bright Red
+		92: '#65ff65', // Bright Green
+		93: '#ffff65', // Bright Yellow
+		94: '#6565ff', // Bright Blue
+		95: '#ff65ff', // Bright Magenta
+		96: '#65ffff', // Bright Cyan
+		97: '#ffffff', // Bright White
+	})
 	function resetState(state) {
 		var out = state.closeTags.join(' ')
 		state.bold = false
@@ -85,25 +103,6 @@ PlasmoidItem {
 		return out
 	}
 	function parseAnsiCode(n, i, tokens, state) {
-		var ansiColors = ({
-			30: '#000000', // Black
-			31: '#aa0000', // Red
-			32: '#00aa00', // Green
-			33: '#aa6500', // Yellow
-			34: '#0000aa', // Blue
-			35: '#aa00aa', // Magenta
-			36: '#00aaaa', // Cyan
-			37: '#aaaaaa', // White
-			90: '#656565', // Bright Black
-			91: '#ff6565', // Bright Red
-			92: '#65ff65', // Bright Green
-			93: '#ffff65', // Bright Yellow
-			94: '#6565ff', // Bright Blue
-			95: '#ff65ff', // Bright Magenta
-			96: '#65ffff', // Bright Cyan
-			97: '#ffffff', // Bright White
-		})
-
 		if (n == 0) { // Reset
 			return resetState(state)
 		} else if (n == 1) {
@@ -137,25 +136,6 @@ PlasmoidItem {
 		return '#' + formatHexInt(r) + formatHexInt(g) + formatHexInt(b)
 	}
 	function parseColorMode(i, tokens) {
-		var ansiColors = ({
-			30: '#000000', // Black
-			31: '#aa0000', // Red
-			32: '#00aa00', // Green
-			33: '#aa6500', // Yellow
-			34: '#0000aa', // Blue
-			35: '#aa00aa', // Magenta
-			36: '#00aaaa', // Cyan
-			37: '#aaaaaa', // White
-			90: '#656565', // Bright Black
-			91: '#ff6565', // Bright Red
-			92: '#65ff65', // Bright Green
-			93: '#ffff65', // Bright Yellow
-			94: '#6565ff', // Bright Blue
-			95: '#ff65ff', // Bright Magenta
-			96: '#65ffff', // Bright Cyan
-			97: '#ffffff', // Bright White
-		})
-
 		var colorMode = parseInt(tokens[++i], 10)
 		if (colorMode == 2) { // RGB
 			var r = parseInt(tokens[++i], 10)
