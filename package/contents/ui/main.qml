@@ -19,7 +19,7 @@ PlasmoidItem {
 		id: executable
 		engine: "executable"
 		connectedSources: []
-		onNewData: {
+		onNewData: (sourceName, data) => {
 			var exitCode = data["exit code"]
 			var exitStatus = data["exit status"]
 			var stdout = data["stdout"]
@@ -227,7 +227,7 @@ PlasmoidItem {
 
 	Connections {
 		target: executable
-		onExited: {
+		function onExited(cmd, exitCode, exitStatus, stdout, stderr) {
 			if ((cmd == config.command) || (cmd == config.tooltipCommand)) {
 				var formattedText = formatOutputText(stdout)
 
@@ -326,7 +326,7 @@ PlasmoidItem {
 			}
 
 			property int wheelDelta: 0
-			onWheel: {
+			onWheel: (wheel) => {
 				var delta = wheel.angleDelta.y || wheel.angleDelta.x
 				wheelDelta += delta
 				// Magic number 120 for common "one click"
