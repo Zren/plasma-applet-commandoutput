@@ -32,6 +32,5 @@
 		"Version": "13",
 		"Website": "https://github.com/Zren/plasma-applet-commandoutput"
 	},
-	"X-Plasma-API": "declarativeappletscript",
 	"X-Plasma-API-Minimum-Version": "6.0"
 }
