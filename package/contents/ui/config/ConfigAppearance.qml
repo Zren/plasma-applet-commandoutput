@@ -86,6 +86,7 @@ KCM.SimpleKCM {
 		ConfigCheckBox {
 			configKey: 'showBackground'
 			text: i18n("Desktop Widget: Show background")
+			visible: plasmoid.location == PlasmaCore.Types.Floating
 		}
 		RowLayout {
 			spacing: 0
