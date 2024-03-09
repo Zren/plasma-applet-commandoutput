@@ -1,60 +1,46 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.kcmutils as KCM
 import org.kde.plasma.core as PlasmaCore
 
-import "../lib"
+import "../libconfig" as LibConfig
 
-KCM.SimpleKCM {
-	
-	property alias cfg_clickCommand: clickCommand.text
-	property alias cfg_mousewheelUpCommand: mousewheelUpCommand.text
-	property alias cfg_mousewheelDownCommand: mousewheelDownCommand.text
-	
-	Kirigami.FormLayout {
-		id: page
+LibConfig.FormKCM {
 
-		Kirigami.Separator {
-			Kirigami.FormData.label: i18n("Mouse Click")
-			Kirigami.FormData.isSection: true
-		}
-		
-		RowLayout {
-			Label {
-				text: i18n("Command:")
-			}
-			TextField {
-				id: clickCommand
-				Layout.fillWidth: true
-			}
-		}
-		
-		Kirigami.Separator {
-			Kirigami.FormData.label: i18n("Mouse Wheel")
-			Kirigami.FormData.isSection: true
-		}
-		
-		RowLayout {
-			Label {
-				text: i18n("Scroll Up:")
-			}
-			TextField {
-				id: mousewheelUpCommand
-				Layout.fillWidth: true
-			}
-		}
-		
-		RowLayout {
-			Label {
-				text: i18n("Scroll Down:")
-			}
-			TextField {
-				id: mousewheelDownCommand
-				Layout.fillWidth: true
-			}
-		}
+	//-------------------------------------------------------
+	LibConfig.Heading {
+		text: i18n("Tooltip")
+	}
+	LibConfig.TextField {
+		Kirigami.FormData.label: i18n("Hover Command:")
+		configKey: 'tooltipCommand'
+	}
+
+
+	//-------------------------------------------------------
+	LibConfig.Heading {
+		text: i18n("Click")
+	}
+	LibConfig.TextField {
+		// id: clickCommand
+		Kirigami.FormData.label: i18n("Run Command:")
+		configKey: 'clickCommand'
+	}
+
+
+	//-------------------------------------------------------
+	LibConfig.Heading {
+		text: i18n("Mouse Wheel")
+	}
+	LibConfig.TextField {
+		// id: mousewheelUpCommand
+		Kirigami.FormData.label: i18n("Scroll Up:")
+		configKey: 'mousewheelUpCommand'
+	}
+	LibConfig.TextField {
+		// id: mousewheelDownCommand
+		Kirigami.FormData.label: i18n("Scroll Down:")
+		configKey: 'mousewheelDownCommand'
 	}
 }
