@@ -8,7 +8,7 @@ import org.kde.plasma.components as PlasmaComponent
 import org.kde.plasma.plasma5support as Plasma5Support
 
 PlasmoidItem {
-	id: root
+	id: widget
 
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.h
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.cpp
@@ -60,8 +60,8 @@ PlasmoidItem {
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
-		onCommandChanged: root.runCommand()
-		onTooltipCommandChanged: root.runCommand()
+		onCommandChanged: widget.runCommand()
+		onTooltipCommandChanged: widget.runCommand()
 		onIntervalChanged: {
 			// interval=0 stops the timer even with Timer.repeat=true, so we may
 			// need to restart the timer. Might as well restart the interval too.
@@ -230,9 +230,9 @@ PlasmoidItem {
 				// console.log('[commandoutput]', 'format', JSON.stringify(formattedText))
 
 				if (cmd == config.command) {
-					root.outputText = formattedText
+					widget.outputText = formattedText
 				} else if (cmd == config.tooltipCommand) {
-					root.tooltipText = formattedText
+					widget.tooltipText = formattedText
 				}
 
 				if (config.waitForCompletion) {
@@ -253,7 +253,7 @@ PlasmoidItem {
 		interval: config.interval
 		running: true
 		repeat: !config.waitForCompletion
-		onTriggered: root.runCommand()
+		onTriggered: widget.runCommand()
 		// onIntervalChanged: console.log('interval', interval)
 		// onRunningChanged: console.log('running', running)
 		// onRepeatChanged: console.log('repeat', repeat)
@@ -264,7 +264,7 @@ PlasmoidItem {
 		}
 	}
 
-	Plasmoid.onActivated: root.performClick()
+	Plasmoid.onActivated: widget.performClick()
 
 	Plasmoid.backgroundHints: plasmoid.configuration.showBackground ? PlasmaCore.Types.DefaultBackground : PlasmaCore.Types.NoBackground
 
@@ -287,8 +287,8 @@ PlasmoidItem {
 		}
 		Layout.minimumWidth: isHorizontal ? itemWidth : -1
 		Layout.fillWidth: isVertical
-		Layout.preferredWidth: itemWidth // Panel root default
-		// width: itemWidth // Desktop root default
+		Layout.preferredWidth: itemWidth // Panel widget default
+		// width: itemWidth // Desktop widget default
 		// onItemWidthChanged: console.log('itemWidth', itemWidth, 'implicitWidth', output.implicitWidth, 'contentWidth', output.contentWidth)
 
 		readonly property int itemHeight: {
@@ -302,8 +302,8 @@ PlasmoidItem {
 		}
 		Layout.minimumHeight: isVertical ? itemHeight : -1
 		Layout.fillHeight: isHorizontal
-		Layout.preferredHeight: itemHeight // Panel root default
-		// height: itemHeight // Desktop root default
+		Layout.preferredHeight: itemHeight // Panel widget default
+		// height: itemHeight // Desktop widget default
 		// onItemHeightChanged: console.log('itemHeight', itemHeight, 'implicitHeight', output.implicitHeight, 'contentHeight', output.contentHeight)
 
 
@@ -317,7 +317,7 @@ PlasmoidItem {
 			cursorShape: output.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
 
 			onClicked: {
-				root.performClick()
+				widget.performClick()
 			}
 
 			property int wheelDelta: 0
@@ -328,11 +328,11 @@ PlasmoidItem {
 				// See: http://qt-project.org/doc/qt-5/qml-qtquick-wheelevent.html#angleDelta-prop
 				while (wheelDelta >= 120) {
 					wheelDelta -= 120
-					root.performMouseWheelUp()
+					widget.performMouseWheelUp()
 				}
 				while (wheelDelta <= -120) {
 					wheelDelta += 120
-					root.performMouseWheelDown()
+					widget.performMouseWheelDown()
 				}
 				wheel.accepted = true
 			}
@@ -345,11 +345,11 @@ PlasmoidItem {
 
 			PlasmaCore.ToolTipArea {
 				anchors.fill: parent
-				mainText: root.tooltipText
-				enabled: root.tooltipText
+				mainText: widget.tooltipText
+				enabled: widget.tooltipText
 			}
 
-			text: root.outputText
+			text: widget.outputText
 
 			color: config.textColor
 			style: config.showOutline ? Text.Outline : Text.Normal
