@@ -28,7 +28,7 @@ import shutil
 import sys
 
 #---
-__version__ = '3'
+__version__ = '4'
 logger = logging.getLogger('kpac')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
@@ -631,17 +631,26 @@ class KPackage:
 						addedKeys.append(line.rstrip('\n')[8:])
 					elif "< msgid" in line:
 						removedKeys.append(line.rstrip('\n')[8:])
+				duplicateKeys = set(addedKeys) & set(removedKeys)
+				for key in duplicateKeys:
+					addedKeys.remove(key)
+					removedKeys.remove(key)
 
 				echoGray("[kpac-i18n] {} changed".format(oldTemplatePath))
 				echoGreen("[kpac-i18n] Added Keys:")
 				if len(addedKeys) >= 1:
-					for key in addedKeys:
+					for key in sorted(addedKeys):
 						echoGreen(key)
 					print("")
 				echoRed("[kpac-i18n] Removed Keys:")
 				if len(removedKeys) >= 1:
-					for key in removedKeys:
+					for key in sorted(removedKeys):
 						echoRed(key)
+					print("")
+				echoGray("[kpac-i18n] Moved Keys:")
+				if len(duplicateKeys) >= 1:
+					for key in sorted(duplicateKeys):
+						echoGray(key)
 					print("")
 
 			else:
@@ -964,6 +973,19 @@ package/contents/locale/fr/LC_MESSAGES/plasma_applet_{self.packageNamespace}.mo
 
 
 	#---
+	def containsGitChanges(self, path='.'):
+		if not isCommandInstalled('git'):
+			echoGray('Git not installed. Skipping git diff check.')
+			return False
+		proc = subprocess.run([
+			'git',
+			'diff',
+			'--stat',
+			path,
+		], capture_output=True)
+		diffStr = proc.stdout.decode('utf-8')
+		return diffStr != ""
+
 	def buildZip(self, dryrun=False):
 		buildFilename = self.buildFilenameFormat.format(
 			packageName=self.packageName,
@@ -1036,6 +1058,12 @@ def kpac_localetest(kpackage, args):
 
 
 def kpac_build(kpackage, args):
+	kpackage.i18nMerge()
+	kpackage.i18nBuild()
+	if kpackage.containsGitChanges(path=kpackage.translateDir):
+		echoError("[kpac-build] Changes detected. Cancelling build.")
+		proc = subprocess.run(['git', 'diff', '--stat', '.'])
+		sys.exit(1)
 	kpackage.buildZip(
 		dryrun=args.dryrun
 	)
