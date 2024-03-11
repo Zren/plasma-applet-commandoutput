@@ -26,7 +26,7 @@ LibConfig.FormKCM {
 		id: interval
 		Kirigami.FormData.label: i18n("Run every ")
 		configKey: 'interval'
-		suffix: "ms"
+		suffix: i18n("ms")
 		stepSize: 500
 	}
 	LibConfig.CheckBox {
