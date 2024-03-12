@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-__version__ = '6'
+__version__ = '7'
 
 #--- User Configurable Defaults
 # You can use `kpac --dir=package --i18ndir=package/translate`
@@ -243,12 +243,12 @@ def kpackagetool():
 
 @functools.cache
 def kstart():
-	if isCommandInstalled('kstart6'):
-		return 'kstart6'
+	if isCommandInstalled('kstart'):
+		return 'kstart'
 	elif isCommandInstalled('kstart5'):
 		return 'kstart5'
 	else:
-		print("[error] Could not find 'kstart6'")
+		print("[error] Could not find 'kstart'")
 		sys.exit(1)
 
 #---

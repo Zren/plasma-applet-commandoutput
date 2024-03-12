@@ -1,11 +1,11 @@
 #!/bin/bash
-# Version 7
+# Version 8
 
 # This script detects if the widget is already installed.
 # If it is, it will use --upgrade instead and restart plasmashell.
 # Eg: kpackagetool6 --type "Plasma/Applet" --install package
 # Eg: kpackagetool6 --type "Plasma/Applet" --upgrade package
-# Eg: killall plasmashell ; kstart6 plasmashell
+# Eg: killall plasmashell ; kstart plasmashell
 
 if [ -f "$PWD/package/metadata.json" ]; then # Plasma6 (and later versions of Plasma5)
 	packageNamespace=`python3 -c 'import sys, json; print(json.load(sys.stdin).get("KPlugin", {}).get("Id", ""))' < "$PWD/package/metadata.json"`
@@ -35,10 +35,10 @@ else
 	echo "[error] Could not find 'kpackagetool6'"
 	exit 1
 fi
-if command -v kstart6 &> /dev/null ; then kstart="kstart6" # Plasma6
+if command -v kstart &> /dev/null ; then kstart="kstart" # Plasma6
 elif command -v kstart5 &> /dev/null ; then kstart="kstart5" # Plasma5
 else
-	echo "[error] Could not find 'kstart5'"
+	echo "[error] Could not find 'kstart'"
 	exit 1
 fi
 restartPlasmashell=false
