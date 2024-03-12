@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2024-03-11 04:25-0400\n"
+"POT-Creation-Date: 2024-03-12 16:30-0400\n"
 "PO-Revision-Date: 2020-10-05 21:55+020\n"
 "Last-Translator: Gilles MOREL <contact@gilles-morel.fr>\n"
 "Language-Team: \n"
@@ -16,6 +16,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../metadata.json
+msgid "Command Output"
+msgstr "Command Output"
+
+#: ../metadata.json
+msgid "Run a command periodically and render its output."
+msgstr "Exécute une commande périodiquement et affiche son retour."
 
 #: ../contents/config/config.qml ../contents/ui/config/ConfigCommand.qml
 msgid "Command"
@@ -132,12 +140,6 @@ msgstr "Par défaut"
 
 #~ msgid "<b>Version:</b> %1"
 #~ msgstr "<b>Version :</b> %1"
-
-#~ msgid "Command Output"
-#~ msgstr "Command Output"
-
-#~ msgid "Run a command periodically and render its output."
-#~ msgstr "Exécute une commande périodiquement et affiche son retour."
 
 #~ msgid "Desktop Widget: Show background"
 #~ msgstr "Pour le widget de bureau : afficher un fond"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
-"POT-Creation-Date: 2024-03-11 04:25-0400\n"
+"POT-Creation-Date: 2024-03-12 16:30-0400\n"
 "PO-Revision-Date: 2020-10-06 13:01+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../metadata.json
+msgid "Command Output"
+msgstr "Opdrachtuitvoer"
+
+#: ../metadata.json
+msgid "Run a command periodically and render its output."
+msgstr "Voer een opdracht periodiek uit en toon de uitvoer ervan."
 
 #: ../contents/config/config.qml ../contents/ui/config/ConfigCommand.qml
 msgid "Command"
@@ -133,12 +141,6 @@ msgstr "Standaard"
 
 #~ msgid "<b>Version:</b> %1"
 #~ msgstr "<b>Versie:</b> %1"
-
-#~ msgid "Command Output"
-#~ msgstr "Opdrachtuitvoer"
-
-#~ msgid "Run a command periodically and render its output."
-#~ msgstr "Voer een opdracht periodiek uit en toon de uitvoer ervan."
 
 #~ msgid "Desktop Widget: Show background"
 #~ msgstr "Bureaubladwidget: achtergrond tonen"
