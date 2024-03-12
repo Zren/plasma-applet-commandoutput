@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+__version__ = '6'
 
 #--- User Configurable Defaults
 # You can use `kpac --dir=package --i18ndir=package/translate`
@@ -6,7 +7,7 @@
 sourceDirDefault = 'package'
 translateDirDefault = 'package/translate'
 qtMinVer="6.0"
-kfMinVer="6.0"
+kfMinVer="6.0" # KDE Frameworks
 plasmaMinVer="6.0"
 filenameTag=f"plasma{plasmaMinVer.replace('.', '_')}"
 
@@ -16,19 +17,20 @@ filenameTag=f"plasma{plasmaMinVer.replace('.', '_')}"
 #---
 import argparse
 import configparser
+from collections import namedtuple
 import datetime
 import functools
 import glob
 import json
 import logging
 import os
+from pprint import pprint
 import re
 import subprocess
 import shutil
 import sys
 
 #---
-__version__ = '4'
 logger = logging.getLogger('kpac')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
@@ -92,6 +94,72 @@ class KdeConfig(configparser.ConfigParser):
 		self.read(self.filename)
 
 
+#--- GetText
+POT_DEFAULT_HEADER="""# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\\n"
+"Report-Msgid-Bugs-To: \\n"
+"POT-Creation-Date: 2000-12-31 23:59-0000\\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\\n"
+"Language-Team: LANGUAGE <LL@li.org>\\n"
+"Language: \\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+
+"""
+PoMessage = namedtuple('PoMessage', ['ctxt', 'id', 'str'])
+class PoFile:
+	def __init__(self, filepath):
+		self.filepath = filepath
+		self.text = None
+		self.messages = []
+		with open(self.filepath, 'r') as fin:
+			self.text = fin.read()
+		self.parse()
+	@property
+	def msgPattern(self):
+		# Edit/Test: https://regex101.com/r/kEJCVL
+		patt = r'(msgctxt[ \t]+(".*")[ \t]*\n)?'
+		patt += r'((".*"[ \t]*\n)*)'
+		patt += r'(msgid[ \t]+(".*")[ \t]*\n)'
+		patt += r'((".*"[ \t]*\n)*)'
+		patt += r'(msgstr[ \t]+(".*")[ \t]*\n)'
+		patt += r'((".*"[ \t]*\n)*)'
+		return patt
+	def _joinMsgStr(self, line1, line234):
+		if line1 is None:
+			return None
+		elif line234 is None:
+			return line1.strip().strip('\"')
+		else:
+			lines = [line1] + line234.split('\n')
+			msgstr = ""
+			for line in lines:
+				msgstr += line.strip().strip('\"')
+			return msgstr
+	def parse(self):
+		for m in re.finditer(self.msgPattern, self.text):
+			msgCtx = self._joinMsgStr(m.group(2), m.group(3))
+			msgId = self._joinMsgStr(m.group(6), m.group(7))
+			msgStr = self._joinMsgStr(m.group(10), m.group(11))
+			msg = PoMessage(msgCtx, msgId, msgStr)
+			self.messages.append(msg)
+	def getMsgStr(self, msgid, msgctxt=None):
+		for msg in self.messages:
+			if msg.ctxt == msgctxt and msg.id == msgid:
+				return msg.str
+		return None
+
+
+
 #---
 def isCommandInstalled(name):
 	return shutil.which(name) is not None
@@ -110,6 +178,15 @@ class LineReplace:
 			fout.write(self.output)
 	def write(self, text):
 		self.output += text
+
+def jsonDumpTabbed(filepath, data):
+	with open(filepath, 'w') as fout:
+		json.dump(data, fout,
+			ensure_ascii=False,
+			indent='\t',
+			sort_keys=True,
+		)
+		fout.write('\n') # Trailing newline at EOF
 
 #---
 # grep matchStr filepath
@@ -519,8 +596,52 @@ class KPackage:
 			'--add-location=file', # Filename only, no line numbers
 		]
 
-		# TODO:
-		# Extract messages from metadata.desktop + metadata.json
+		oldTemplateFilename = 'template.pot'
+		newTemplateFilename = 'template.pot.new'
+		oldTemplatePath = os.path.join(self.translateDir, oldTemplateFilename)
+		newTemplatePath = os.path.join(self.translateDir, newTemplateFilename)
+
+		if os.path.exists(self.jsonMetaFilepath):
+			echoGray("[kpac-i18n] Extracting metadata.json")
+			with open(self.jsonMetaFilepath, 'r') as fin:
+				metadata = json.load(fin)
+			# This template header is overwritten later so the only changes needed is
+			# 'charset=CHARSET' => 'charset=UTF-8' so that xgettext doesn't complain.
+			# POT_DEFAULT_HEADER already has the charset=UTF-8 replaced.
+			newTemplateText = POT_DEFAULT_HEADER
+			kp = metadata.get('KPlugin', {})
+			trKeywords = [
+				'Name',
+				'Description',
+			]
+			relativeMetadataPath = os.path.relpath(self.jsonMetaFilepath, self.translateDir)
+			for keyword in trKeywords:
+				keywordMessage = kp.get(keyword, '')
+				keywordMessage = keywordMessage.replace('\"', r'\"')
+				if keyword != "":
+					# keywordText = f"#: {relativeMetadataPath}\nmsgctxt \"{keyword}\"\nmsgid \"{keywordMessage}\"\nmsgstr \"\"\n\n"
+					keywordText = f"#: {relativeMetadataPath}\nmsgid \"{keywordMessage}\"\nmsgstr \"\"\n\n"
+					newTemplateText += keywordText
+			with open(newTemplatePath, 'w') as fout:
+				fout.write(newTemplateText)
+		else:
+			# TODO: Port parsing Desktop File
+			# Note: xgettext v0.20.1 (Kubuntu 20.04) and below will attempt to translate Icon,
+			# so we need to specify Name, GenericName, Comment, and Keywords.
+			# https://github.com/Zren/plasma-applet-lib/issues/1
+			# https://savannah.gnu.org/support/?108887
+			# find "${packageRoot}" -name '*.desktop' | sort > "${DIR}/infiles.list"
+			# xgettext \
+			# 	${potArgs} \
+			# 	--files-from="${DIR}/infiles.list" \
+			# 	--language=Desktop \
+			# 	-k -kName -kGenericName -kComment -kKeywords \
+			# 	-D "${packageRoot}" \
+			# 	-D "${DIR}" \
+			# 	-o "template.pot.new" \
+			# 	|| \
+			# 	{ echoRed "[translate/merge] error while calling xgettext. aborting."; exit 1; }
+			pass
 
 
 		# See Ki18n's extract-messages.sh for a full example:
@@ -545,10 +666,6 @@ class KPackage:
 			], stdin=findProc.stdout, stdout=fout)
 			findProc.wait()
 
-		oldTemplateFilename = 'template.pot'
-		newTemplateFilename = 'template.pot.new'
-		oldTemplatePath = os.path.join(self.translateDir, oldTemplateFilename)
-		newTemplatePath = os.path.join(self.translateDir, newTemplateFilename)
 		potArgs += [
 			# '--files-from', infilesPath,
 			'--files-from', 'infiles.list',
@@ -584,6 +701,7 @@ class KPackage:
 		returncode = subprocess.call(['xgettext'] + potArgs + [
 			'-D', self.translateRoot,
 			'-D', '.', # cwd should be translateDir
+			'--join-existing',
 			'-o', newTemplateFilename,
 		], cwd=self.translateDir)
 		if returncode != 0:
@@ -662,7 +780,7 @@ class KPackage:
 			echoGray("[kpac-i18n] Created {}".format(oldTemplatePath))
 			os.rename(newTemplatePath, oldTemplatePath)
 
-		#--- TODO -------------------------------------------------------
+		#--- Status Table Header
 		potMessageCount = grep_re_count('msgstr ""\n(\n|$)', oldTemplatePath)
 		status = ""
 		statusFormat = "| {:<8} | {:>7} | {:>5} |\n" # .format("fr", "27/27", "100%")
@@ -673,7 +791,7 @@ class KPackage:
 		os.remove(infilesPath)
 		echoGray("[kpac-i18n] Done extracting messages")
 
-		# #---
+		#--- Merge
 		echoGray("[kpac-i18n] " + TC.Bold + "[Merging messages]")
 		for catFilepath in glob.glob(os.path.join(self.translateDir, '*.po')):
 			catLocale = os.path.splitext(os.path.basename(catFilepath))[0]
@@ -750,61 +868,90 @@ class KPackage:
 
 		echoGray("[kpac-i18n] Done merging messages")
 
-		# #---
-		# echoGray "[translate/merge] Updating .desktop file"
+		#---
+		if os.path.exists(self.jsonMetaFilepath):
+			echoGray("[kpac-i18n] Updating metadata.json")
+			with open(self.jsonMetaFilepath, 'r') as fin:
+				metadata = json.load(fin)
+			trKeywordsMap = {
+				'Name': '',
+				'Description': '',
+			}
+			kp = metadata.get('KPlugin', {})
+			for keyword in trKeywordsMap.keys():
+				trKeywordsMap[keyword] = kp.get(keyword, '')
+			metadataChanged = False
+			for catFilepath in glob.glob(os.path.join(self.translateDir, '*.po')):
+				catFilename = os.path.basename(catFilepath)
+				catLocale = os.path.splitext(catFilename)[0]
+				catFile = PoFile(catFilepath)
+				for keyword, msgid in trKeywordsMap.items():
+					catMsgStr = catFile.getMsgStr(msgid)
+					catKeyword = f"{keyword}[{catLocale}]"
+					if kp.get(catKeyword) != catMsgStr:
+						kp[catKeyword] = catMsgStr
+						print(catKeyword, catMsgStr)
+						metadataChanged = True
+			if metadataChanged:
+				jsonDumpTabbed(self.jsonMetaFilepath, metadata)
+				echoWarning("[kpac-i18n] metadata.json was Changed!")
 
-		# # Generate LINGUAS for msgfmt
-		# if [ -f "$DIR/LINGUAS" ]; then
-		# 	rm "$DIR/LINGUAS"
-		# fi
-		# touch "$DIR/LINGUAS"
-		# for cat in $catalogs; do
-		# 	catLocale=`basename ${cat%.*}`
-		# 	echo "${catLocale}" >> "$DIR/LINGUAS"
-		# done
+		if os.path.exists(self.desktopMetaFilepath):
+			# echoGray("[kpac-i18n] Updating metadata.desktop")
+			pass
 
-		# cp -f "$DIR/../metadata.desktop" "$DIR/template.desktop"
-		# sed -i '/^Name\[/ d; /^GenericName\[/ d; /^Comment\[/ d; /^Keywords\[/ d' "$DIR/template.desktop"
+			# # Generate LINGUAS for msgfmt
+			# if [ -f "$DIR/LINGUAS" ]; then
+			# 	rm "$DIR/LINGUAS"
+			# fi
+			# touch "$DIR/LINGUAS"
+			# for cat in $catalogs; do
+			# 	catLocale=`basename ${cat%.*}`
+			# 	echo "${catLocale}" >> "$DIR/LINGUAS"
+			# done
 
-		# msgfmt \
-		# 	--desktop \
-		# 	--template="$DIR/template.desktop" \
-		# 	-d "$DIR/" \
-		# 	-o "$DIR/new.desktop"
+			# cp -f "$DIR/../metadata.desktop" "$DIR/template.desktop"
+			# sed -i '/^Name\[/ d; /^GenericName\[/ d; /^Comment\[/ d; /^Keywords\[/ d' "$DIR/template.desktop"
 
-		# # Delete empty msgid messages that used the po header
-		# if [ ! -z "$(grep '^Name=$' "$DIR/new.desktop")" ]; then
-		# 	echo "[translate/merge] Name in metadata.desktop is empty!"
-		# 	sed -i '/^Name\[/ d' "$DIR/new.desktop"
-		# fi
-		# if [ ! -z "$(grep '^GenericName=$' "$DIR/new.desktop")" ]; then
-		# 	echo "[translate/merge] GenericName in metadata.desktop is empty!"
-		# 	sed -i '/^GenericName\[/ d' "$DIR/new.desktop"
-		# fi
-		# if [ ! -z "$(grep '^Comment=$' "$DIR/new.desktop")" ]; then
-		# 	echo "[translate/merge] Comment in metadata.desktop is empty!"
-		# 	sed -i '/^Comment\[/ d' "$DIR/new.desktop"
-		# fi
-		# if [ ! -z "$(grep '^Keywords=$' "$DIR/new.desktop")" ]; then
-		# 	echo "[translate/merge] Keywords in metadata.desktop is empty!"
-		# 	sed -i '/^Keywords\[/ d' "$DIR/new.desktop"
-		# fi
+			# msgfmt \
+			# 	--desktop \
+			# 	--template="$DIR/template.desktop" \
+			# 	-d "$DIR/" \
+			# 	-o "$DIR/new.desktop"
 
-		# # Place translations at the bottom of the desktop file.
-		# translatedLines=`cat "$DIR/new.desktop" | grep "]="`
-		# if [ ! -z "${translatedLines}" ]; then
-		# 	sed -i '/^Name\[/ d; /^GenericName\[/ d; /^Comment\[/ d; /^Keywords\[/ d' "$DIR/new.desktop"
-		# 	if [ "$(tail -c 2 "$DIR/new.desktop" | wc -l)" != "2" ]; then
-		# 		# Does not end with 2 empty lines, so add an empty line.
-		# 		echo "" >> "$DIR/new.desktop"
-		# 	fi
-		# 	echo "${translatedLines}" >> "$DIR/new.desktop"
-		# fi
+			# # Delete empty msgid messages that used the po header
+			# if [ ! -z "$(grep '^Name=$' "$DIR/new.desktop")" ]; then
+			# 	echo "[translate/merge] Name in metadata.desktop is empty!"
+			# 	sed -i '/^Name\[/ d' "$DIR/new.desktop"
+			# fi
+			# if [ ! -z "$(grep '^GenericName=$' "$DIR/new.desktop")" ]; then
+			# 	echo "[translate/merge] GenericName in metadata.desktop is empty!"
+			# 	sed -i '/^GenericName\[/ d' "$DIR/new.desktop"
+			# fi
+			# if [ ! -z "$(grep '^Comment=$' "$DIR/new.desktop")" ]; then
+			# 	echo "[translate/merge] Comment in metadata.desktop is empty!"
+			# 	sed -i '/^Comment\[/ d' "$DIR/new.desktop"
+			# fi
+			# if [ ! -z "$(grep '^Keywords=$' "$DIR/new.desktop")" ]; then
+			# 	echo "[translate/merge] Keywords in metadata.desktop is empty!"
+			# 	sed -i '/^Keywords\[/ d' "$DIR/new.desktop"
+			# fi
 
-		# # Cleanup
-		# mv "$DIR/new.desktop" "$DIR/../metadata.desktop"
-		# rm "$DIR/template.desktop"
-		# rm "$DIR/LINGUAS"
+			# # Place translations at the bottom of the desktop file.
+			# translatedLines=`cat "$DIR/new.desktop" | grep "]="`
+			# if [ ! -z "${translatedLines}" ]; then
+			# 	sed -i '/^Name\[/ d; /^GenericName\[/ d; /^Comment\[/ d; /^Keywords\[/ d' "$DIR/new.desktop"
+			# 	if [ "$(tail -c 2 "$DIR/new.desktop" | wc -l)" != "2" ]; then
+			# 		# Does not end with 2 empty lines, so add an empty line.
+			# 		echo "" >> "$DIR/new.desktop"
+			# 	fi
+			# 	echo "${translatedLines}" >> "$DIR/new.desktop"
+			# fi
+
+			# # Cleanup
+			# mv "$DIR/new.desktop" "$DIR/../metadata.desktop"
+			# rm "$DIR/template.desktop"
+			# rm "$DIR/LINGUAS"
 
 		#---
 		# Populate ReadMe.md
@@ -918,7 +1065,6 @@ package/contents/locale/fr/LC_MESSAGES/plasma_applet_{self.packageNamespace}.mo
 		with open(self.jsonMetaFilepath, 'r') as fin:
 			metadata = json.load(fin)
 
-		from pprint import pprint
 		pprint(metadata)
 
 		if 'X-Plasma-API-Minimum-Version' not in metadata:
@@ -964,12 +1110,7 @@ package/contents/locale/fr/LC_MESSAGES/plasma_applet_{self.packageNamespace}.mo
 
 		pprint(metadata)
 
-		with open(self.jsonMetaFilepath, 'w') as fout:
-			metadata = json.dump(metadata, fout,
-				ensure_ascii=False,
-				indent='\t',
-				sort_keys=True,
-			)
+		jsonDumpTabbed(self.jsonMetaFilepath, metadata)
 
 
 	#---
