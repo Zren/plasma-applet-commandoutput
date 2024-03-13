@@ -10,6 +10,9 @@ import org.kde.plasma.plasma5support as Plasma5Support
 PlasmoidItem {
 	id: widget
 
+	width: PlasmaCore.Units.gridUnit * 15
+    height: PlasmaCore.Units.gridUnit * 25
+
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.h
 	// https://github.com/KDE/plasma-workspace/blob/master/dataengines/executable/executable.cpp
 	// https://github.com/KDE/plasma-framework/blob/master/src/declarativeimports/core/datasource.h
