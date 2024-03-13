@@ -1,3 +1,5 @@
+// Version 1
+
 import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
