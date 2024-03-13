@@ -1,3 +1,8 @@
+## v13 - March 13 2024
+
+* Port to Plasma 6 / Qt6 (Issue #43 and #47) by @guss77 and @aricaldeira (PR #49)
+* Adding tooltip command option by @aricaldeira (Pull Request #49)
+
 ## v12 - April 29 2022
 
 * Implement parsing terminal colors (ansi escape sequences) (Issue #7)
