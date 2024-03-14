@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
 "POT-Creation-Date: 2024-03-12 16:30-0400\n"
-"PO-Revision-Date: 2020-10-06 13:01+0200\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2024-03-14 10:27+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <vistausss@outlook.com>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ../metadata.json
 msgid "Command Output"
@@ -32,19 +32,19 @@ msgstr "Opdracht"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr ""
+msgstr "Vormgeving"
 
 #: ../contents/config/config.qml
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Tooltip"
-msgstr ""
+msgstr "Hulpballon"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Hover Command:"
-msgstr ""
+msgstr "Opdracht na aanwijzen:"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Click"
@@ -76,7 +76,7 @@ msgstr "Lettertype:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Font Size:"
-msgstr "Lettergrootte:"
+msgstr "Tekstgrootte:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "px"
@@ -104,7 +104,7 @@ msgstr "Bureaubladwidget:"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Show background"
-msgstr "achtergrond tonen"
+msgstr "Achtergrond tonen"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Fixed Width:"
@@ -124,7 +124,7 @@ msgstr "Uitvoeren, elke "
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "Wait for completion"
@@ -132,7 +132,7 @@ msgstr "Wachten tot opdracht is afgerond"
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "Enabled"
-msgstr ""
+msgstr "Ingeschakeld"
 
 #: ../contents/ui/libconfig/FontFamily.qml
 msgctxt "Use default font"
