@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: commandoutput\n"
 "Report-Msgid-Bugs-To: https://github.com/Zren/plasma-applet-commandoutput\n"
 "POT-Creation-Date: 2024-03-12 16:30-0400\n"
-"PO-Revision-Date: 2020-10-05 21:55+020\n"
-"Last-Translator: Gilles MOREL <contact@gilles-morel.fr>\n"
+"PO-Revision-Date: 2024-03-14 09:56+020\n"
+"Last-Translator: Sasha MOREL <s.morel@almtesh.net>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -31,19 +31,19 @@ msgstr "Commande"
 
 #: ../contents/config/config.qml
 msgid "Appearance"
-msgstr ""
+msgstr "Apparence"
 
 #: ../contents/config/config.qml
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Tooltip"
-msgstr ""
+msgstr "Infobulle"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Hover Command:"
-msgstr ""
+msgstr "Commande au survol :"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Click"
@@ -55,7 +55,7 @@ msgstr "Lancer la commande :"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Mouse Wheel"
-msgstr "Roulette de souris"
+msgstr "Molette de souris"
 
 #: ../contents/ui/config/ConfigActions.qml
 msgid "Scroll Up:"
@@ -111,7 +111,7 @@ msgstr "Largeur fixe :"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Fixed Height:"
-msgstr "Hauteur fixée :"
+msgstr "Hauteur fixe :"
 
 #: ../contents/ui/config/ConfigAppearance.qml
 msgid "Replace all newlines with spaces"
@@ -123,7 +123,7 @@ msgstr "Exécuter toutes les "
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "ms"
-msgstr ""
+msgstr " ms"
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "Wait for completion"
@@ -131,7 +131,7 @@ msgstr "Attendre la fin de l'éxécution"
 
 #: ../contents/ui/config/ConfigCommand.qml
 msgid "Enabled"
-msgstr ""
+msgstr "Activé"
 
 #: ../contents/ui/libconfig/FontFamily.qml
 msgctxt "Use default font"
