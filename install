@@ -1,5 +1,5 @@
 #!/bin/bash
-# Version 8
+# Version 9
 
 # This script detects if the widget is already installed.
 # If it is, it will use --upgrade instead and restart plasmashell.
@@ -57,13 +57,21 @@ if [ $? == 0 ]; then
 	isAlreadyInstalled=true
 fi
 
+result=1
 if $isAlreadyInstalled; then
 	# Eg: kpackagetool6 --type "Plasma/Applet" --upgrade package
 	"$kpackagetool" -t "${packageServiceType}" -u package
+	result=$?
 	restartPlasmashell=true
 else
 	# Eg: kpackagetool6 --type "Plasma/Applet" --install package
 	"$kpackagetool" -t "${packageServiceType}" -i package
+	result=$?
+fi
+echo "result=$result"
+if [ $result != 0 ]; then
+	echo "[error] Could not install package. You may need to first manually delete the old package in ~/.local/share/plasma/plasmoids/"
+	exit $result
 fi
 
 if $restartPlasmashell; then
