@@ -1,4 +1,4 @@
-// Version 5
+// Version 6
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -33,7 +33,7 @@ QQC2.TextField {
 		anchors.right: parent.right
 		anchors.bottom: parent.bottom
 
-		width: height
+		width: implicitBackgroundHeight
 	}
 
 	Timer { // throttle

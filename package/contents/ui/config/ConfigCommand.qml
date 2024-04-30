@@ -18,9 +18,9 @@ LibConfig.FormKCM {
 	}
 	LibConfig.TextField {
 		id: command
-		Kirigami.FormData.label: i18n("Command")
 		// configKey: 'command'
-		Layout.fillWidth: true
+		Kirigami.FormData.isSection: true
+		wrapMode: LibConfig.TextField.Wrap
 	}
 	LibConfig.SpinBox {
 		id: interval
