@@ -20,6 +20,8 @@ LibConfig.FormKCM {
 		id: command
 		// configKey: 'command'
 		Kirigami.FormData.isSection: true
+		Layout.fillWidth: true
+		Layout.preferredWidth: 240 * Screen.devicePixelRatio // + ~180px from label column
 		wrapMode: LibConfig.TextField.Wrap
 	}
 	LibConfig.SpinBox {
