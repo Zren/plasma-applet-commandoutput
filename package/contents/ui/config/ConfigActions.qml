@@ -17,7 +17,7 @@ LibConfig.FormKCM {
 	ColumnLayout {
 		Kirigami.FormData.isSection: true
 		Layout.preferredWidth: 360 * Screen.devicePixelRatio
-		spacing: Kirigami.smallSpacing
+		spacing: 0
 		QQC2.Label {
 			text: i18n("Hover Command:")
 		}
@@ -37,7 +37,7 @@ LibConfig.FormKCM {
 	ColumnLayout {
 		Kirigami.FormData.isSection: true
 		Layout.preferredWidth: 360 * Screen.devicePixelRatio
-		spacing: Kirigami.smallSpacing
+		spacing: 0
 		QQC2.Label {
 			text: i18n("Run Command:")
 		}
@@ -57,7 +57,7 @@ LibConfig.FormKCM {
 	ColumnLayout {
 		Kirigami.FormData.isSection: true
 		Layout.preferredWidth: 360 * Screen.devicePixelRatio
-		spacing: Kirigami.smallSpacing
+		spacing: 0
 		QQC2.Label {
 			text: i18n("Scroll Up:")
 		}
@@ -70,7 +70,7 @@ LibConfig.FormKCM {
 	ColumnLayout {
 		Kirigami.FormData.isSection: true
 		Layout.preferredWidth: 360 * Screen.devicePixelRatio
-		spacing: Kirigami.smallSpacing
+		spacing: 0
 		QQC2.Label {
 			text: i18n("Scroll Down:")
 		}
