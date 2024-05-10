@@ -350,7 +350,27 @@ PlasmoidItem {
 
 			PlasmaCore.ToolTipArea {
 				anchors.fill: parent
-				mainText: widget.tooltipText
+				mainItem: Text {
+					text: widget.tooltipText
+
+					// All other style from the parent Text
+					color: output.color
+					style: output.style
+					styleColor: output.styleColor
+					linkColor: output.linkColor
+					onLinkActivated: output.onLinkActivated
+					font.pointSize: output.font.pointSize
+					font.family: output.font.family
+					font.weight: output.font.weight
+					font.italic: output.font.italic
+					font.underline: output.font.underline
+					fontSizeMode: output.fontSizeMode
+					horizontalAlignment: output.horizontalAlignment
+					verticalAlignment: output.verticalAlignment
+					property bool isFixedWidth: output.isFixedWidth
+					elide: output.elide
+					wrapMode: output.wrapMode
+				}
 				enabled: widget.tooltipText
 			}
 
