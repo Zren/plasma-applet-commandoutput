@@ -47,10 +47,16 @@
 			<!-- Text.AlignBottom: 64  -->
 			<default>128</default>
 		</entry>
+		<entry name="lineSpacing" type="double">
+			<default>1</default>
+		</entry>
 		<entry name="textColor" type="string">
 			<default></default>
 		</entry>
 		<entry name="outlineColor" type="string">
+			<default></default>
+		</entry>
+		<entry name="spaceCharacter" type="string">
 			<default></default>
 		</entry>
 		<entry name="showOutline" type="bool">

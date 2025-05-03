@@ -28,6 +28,15 @@ LibConfig.FormKCM {
 		alignConfigKey: 'textAlign'
 		vertAlignConfigKey: 'vertAlign'
 	}
+	LibConfig.SpinBox {
+		Kirigami.FormData.label: i18n("Line spacing:")
+		configKey: 'lineSpacing'
+		decimals: 2
+		suffix: "x"
+		minimumValue: 0.1
+		maximumValue: 2
+		stepSize: Math.round(0.1 * factor)
+	}
 
 
 	//-------------------------------------------------------
@@ -49,6 +58,11 @@ LibConfig.FormKCM {
 			configKey: 'outlineColor'
 			defaultColor: PlasmaCore.Theme.backgroundColor
 		}
+	}
+	LibConfig.TextField {
+		Kirigami.FormData.label: i18n("Space Character:")
+		configKey: 'spaceCharacter'
+		defaultValue: '&nbsp;'
 	}
 
 

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQml
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
@@ -59,6 +60,7 @@ PlasmoidItem {
 		readonly property color textColor: plasmoid.configuration.textColor || Kirigami.Theme.textColor
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || Kirigami.Theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
+		readonly property string spaceCharacter: plasmoid.configuration.spaceCharacter || ' '
 
 		onCommandChanged: widget.runCommand()
 		onTooltipCommandChanged: widget.runCommand()
@@ -76,7 +78,6 @@ PlasmoidItem {
 			}
 		}
 	}
-
 	// https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 	property var ansiColors: ({
 		30: '#000000', // Black
@@ -96,32 +97,11 @@ PlasmoidItem {
 		96: '#65ffff', // Bright Cyan
 		97: '#ffffff', // Bright White
 	})
-	function resetState(state) {
-		var out = state.closeTags.join(' ')
+	function resetColorState(state) {
 		state.bold = false
-		state.closeTags = []
-		return out
+		state.fontColor = config.textColor
 	}
-	function parseAnsiCode(n, i, tokens, state) {
-		if (n == 0) { // Reset
-			return resetState(state)
-		} else if (n == 1) {
-			state.closeTags.push('</b>')
-			state.bold = true
-			return '<b>'
-		} else if (30 <= n && n <= 37 || 90 <= n && n <= 97) {
-			if (state.bold && 30 <= n && n <= 37) {
-				// Bold also intensifies the colors to "Bright".
-				// 30 => 90
-				n += 60
-			}
-			var hexColor = ansiColors[n]
-			state.closeTags.push('</font>')
-			return '<font color="' + hexColor + '">'
-		} else {
-			return ''
-		}
-	}
+
 	// https://stackoverflow.com/questions/4745317/converting-integers-to-hex-string-in-javascript
 	function formatHexInt(n) {
 		var num = Number(n)
@@ -165,9 +145,9 @@ PlasmoidItem {
 		}
 		return null
 	}
-	function parseAnsiEscape(codes, state) {
+
+	function parseColorAnsi(codes, outFormatSettings) {
 		var tokens = codes.split(';')
-		var out = ''
 		for (var i = 0; i < tokens.length; i++) {
 			tokens[i] = parseInt(tokens[i], 10)
 		}
@@ -176,53 +156,214 @@ PlasmoidItem {
 			if (token == 38) { // Set FG
 				var hexColor = parseColorMode(i, tokens)
 				if (hexColor) {
-					state.closeTags.push('</font>')
-					out += '<font color="' + hexColor + '">'
+					outFormatSettings.fontColor = hexColor
 				}
 			} else if (token == 48) { // Set BG
-				var hexColor = parseColorMode(i, tokens)
 				// Ignore
-			} else {
-				out += parseAnsiCode(token, i, tokens, state)
+			} else { //Setting font color
+				if (token == 0) { // Reset to default
+					resetColorState(outFormatSettings)
+				} else if (token == 1) { // Make bold
+					outFormatSettings.bold = true
+				} else if (30 <= token && token <= 37 || 90 <= token && token <= 97) {
+					if (outFormatSettings.bold && 30 <= token && token <= 37) {
+						// Bold also intensifies the colors to "Bright".
+						// 30 => 90
+						token += 60
+					}
+					var hexColor = ansiColors[token]
+					outFormatSettings.fontColor = hexColor;
+				}
 			}
 		}
-		return out
 	}
+
+	function parsePositionalAnsi(code, isNegative, isModifyingRow, outFormatSettings) {
+		var token = parseInt(code, 10)
+
+		if(isNegative) {
+			token *= -1
+		}
+
+		if(isModifyingRow) {
+			outFormatSettings.rowPos += token;
+			if(outFormatSettings.rowPos < 0) {
+				outFormatSettings.rowPos = 0
+			}
+		} else {
+			outFormatSettings.colPos += token;
+			if(outFormatSettings.colPos < 0) {
+				outFormatSettings.colPos = 0
+			}
+		}
+
+	}
+
+
 
 	property string outputText: ''
 	property string tooltipText: ''
 
 	function formatOutputText(stdout) {
-		var formattedText = stdout
+		// Step 1: Split the text at each ansi code
+		//Pure text data without the ansi delimiter
+		var rawChunks = stdout.split(/\033/g)
 
-		// Newlines
-		if (plasmoid.configuration.replaceAllNewlines) {
-			formattedText = formattedText.replace(/\n/g, ' ').trim()
-		} else if (formattedText.length >= 1 && formattedText[formattedText.length-1] == '\n') {
-			formattedText = formattedText.substr(0, formattedText.length-1)
-		}
+		//Chunks labelled with formatting + positional data
+		var sanitizedChunks = []
 
-		// Terminal Colors (Issue #7)
-		var state = {
-			html: false,
-			bold: false,
-			closeTags: [],
+		var currentSettings = {
+			fontColor: '#ffffff',
+			isBold: false,
+			rowPos: 0,
+			colPos: 0
 		}
-		formattedText = formattedText.replace(/\033\[(\d+(;\d+)*)?m/g, function(match, p1, p2){
-			state.html = true
-			if (typeof p1 === 'string') {
-				return parseAnsiEscape(p1, state)
-			} else { // \033[m is Reset
-				return parseAnsiEscape('0', state)
+		resetColorState(currentSettings)
+
+		//Step 2, determine the format and location of each chunk.
+		var maxRow = 0;
+		for(var i = 0; i < rawChunks.length; i++) {
+			var curChunk = rawChunks[i];
+
+			if(curChunk.length == 0) {
+				continue
 			}
-		})
-		formattedText += resetState(state)
 
-		// Format Newlines when in HTML mode
-		if (state.html) {
-			formattedText = formattedText.replace(/\n/g, '<br>')
+			if (plasmoid.configuration.replaceAllNewlines) {
+				curChunk = curChunk.replace(/\n/g, ' ').trim()
+			}
+
+			//If this chunk was split by a color related code, update the current format
+			curChunk = curChunk.replace(/\[(\d+(;\d+)*)?m/g, function(match, p1, p2){
+				if (typeof p1 === 'string') {
+					parseColorAnsi(p1, currentSettings)
+				}
+				return ""
+			})
+			//If it is a positional related code, update the position
+			//Col left
+			curChunk = curChunk.replace(/\[(\d+)?D/g, function(match, p1, p2){
+				if (typeof p1 === 'string') {
+					parsePositionalAnsi(p1, true, false, currentSettings)
+				}
+				return ""
+			})
+			//Col Right
+			curChunk = curChunk.replace(/\[(\d+)?C/g, function(match, p1, p2){
+				if (typeof p1 === 'string') {
+					parsePositionalAnsi(p1, false, false, currentSettings)
+				}
+				return ""
+			})
+			//Row Up
+			curChunk = curChunk.replace(/\[(\d+)?A/g, function(match, p1, p2){
+				if (typeof p1 === 'string') {
+					parsePositionalAnsi(p1, true, true, currentSettings)
+				}
+				return ""
+			})
+			//Row Down
+			curChunk = curChunk.replace(/\[(\d+)?B/g, function(match, p1, p2){
+				if (typeof p1 === 'string') {
+					parsePositionalAnsi(p1, false, true, currentSettings)
+				}
+				return ""
+			})
+
+			curChunk = curChunk.replace(/\[\?25l/g, function(match, p1, p2){
+				//Changes cursor visibility, ignore
+				return ""
+			})
+			curChunk = curChunk.replace(/\[\?25h/g, function(match, p1, p2){
+				//Changes cursor visibility, ignore
+				return ""
+			})
+			//TODO: implement wrapping
+			curChunk = curChunk.replace(/\[\?7l/g, function(match, p1, p2){
+				//ignore
+				return ""
+			})
+			curChunk = curChunk.replace(/\[\?7h/g, function(match, p1, p2){
+				//ignore
+				return ""
+			})
+
+
+			//Split chunks into smaller chunks at linebreaks
+			var subChunks = curChunk.split('\n')
+			//Insert the chunk(s) into the dataset
+			for(var j = 0; j < subChunks.length; j++) {
+				sanitizedChunks.push({
+					fontColor: currentSettings.fontColor,
+					isBold: currentSettings.isBold,
+					rowPos: currentSettings.rowPos,
+					colPos: currentSettings.colPos,
+					text: subChunks[j]
+				})
+				maxRow = Math.max(maxRow, currentSettings.rowPos);
+				if(j + 1 < subChunks.length) { // We hit a linebreak
+					currentSettings.rowPos = currentSettings.rowPos + 1;
+					currentSettings.colPos = 0;
+				} else { //Last of the chunks
+					currentSettings.colPos += subChunks[j].length
+				}
+			}
 		}
-		return formattedText
+		//Step 3, check for any overlap (TODO)
+
+
+		//Step 4: write to output
+
+		//Start by making each row
+		var rowChunks = [];
+		for(var i = 0; i < maxRow + 1; i++) {
+			rowChunks.push({
+				text: '',
+				actualLength: 0
+			})
+		}
+
+		for(var i = 0; i < sanitizedChunks.length; i++) {
+			var curChunk = sanitizedChunks[i]
+
+			if(curChunk.text.length == 0) {
+				continue
+			}
+
+			var toAppend = ''
+			if(curChunk.isBold) {
+				toAppend += '<b>'
+			}
+			if(curChunk.fontColor != config.textColor) {
+				toAppend += '<font color="' + curChunk.fontColor + '">'
+			}
+
+			for(var j = rowChunks[curChunk.rowPos].actualLength; j < curChunk.colPos; j++) {
+				toAppend += config.spaceCharacter
+				rowChunks[curChunk.rowPos].actualLength++
+			}
+			toAppend += curChunk.text
+			rowChunks[curChunk.rowPos].actualLength += curChunk.text.length
+
+			if(curChunk.fontColor != config.textColor) {
+				toAppend += '</font>'
+			}
+
+			if(curChunk.isBold) {
+				toAppend += '</b>'
+			}
+			rowChunks[curChunk.rowPos].text += toAppend
+		}
+
+		//Then write each row
+		var out = "<pre>" + rowChunks[0].text
+		for(var i = 1; i < rowChunks.length; i++) {
+			out += "<br>"
+			out += rowChunks[i].text
+		}
+		out += '</pre>'
+		//TODO FINISH
+		return out;
 	}
 
 	Connections {
@@ -385,6 +526,7 @@ PlasmoidItem {
 			}
 			elide: Text.ElideRight
 			wrapMode: isFixedWidth ? Text.Wrap : Text.NoWrap
+			lineHeight: plasmoid.configuration.lineSpacing || 1
 		}
 
 	}
