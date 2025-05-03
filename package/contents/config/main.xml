@@ -50,6 +50,54 @@
 		<entry name="textColor" type="string">
 			<default></default>
 		</entry>
+		<entry name="textc1base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc1bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc2base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc2bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc3base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc3bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc4base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc4bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc5base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc5bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc6base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc6bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc7base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc7bright" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc8base" type="string">
+			<default></default>
+		</entry>
+		<entry name="textc8bright" type="string">
+				<default></default>
+		</entry>
 		<entry name="outlineColor" type="string">
 			<default></default>
 		</entry>

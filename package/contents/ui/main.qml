@@ -60,6 +60,25 @@ PlasmoidItem {
 		readonly property color outlineColor: plasmoid.configuration.outlineColor || Kirigami.Theme.backgroundColor
 		readonly property bool showOutline: plasmoid.configuration.showOutline
 
+		readonly property var ansiColors: ({
+			30: plasmoid.configuration.textc1base || '#000000', // Black
+			31: plasmoid.configuration.textc2base || '#aa0000', // Red
+			32: plasmoid.configuration.textc3base || '#00aa00', // Green
+			33: plasmoid.configuration.textc4base || '#aa6500', // Yellow
+			34: plasmoid.configuration.textc5base || '#0000aa', // Blue
+			35: plasmoid.configuration.textc6base || '#aa00aa', // Magenta
+			36: plasmoid.configuration.textc7base || '#00aaaa', // Cyan
+			37: plasmoid.configuration.textc8base || '#aaaaaa', // White
+			90: plasmoid.configuration.textc1bright || '#656565', // Bright Black
+			91: plasmoid.configuration.textc2bright || '#ff6565', // Bright Red
+			92: plasmoid.configuration.textc3bright || '#65ff65', // Bright Green
+			93: plasmoid.configuration.textc4bright || '#ffff65', // Bright Yellow
+			94: plasmoid.configuration.textc5bright || '#6565ff', // Bright Blue
+			95: plasmoid.configuration.textc6bright || '#ff65ff', // Bright Magenta
+			96: plasmoid.configuration.textc7bright || '#65ffff', // Bright Cyan
+			97: plasmoid.configuration.textc8bright || '#ffffff', // Bright White
+		})
+
 		onCommandChanged: widget.runCommand()
 		onTooltipCommandChanged: widget.runCommand()
 		onIntervalChanged: {
@@ -77,25 +96,6 @@ PlasmoidItem {
 		}
 	}
 
-	// https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-	property var ansiColors: ({
-		30: '#000000', // Black
-		31: '#aa0000', // Red
-		32: '#00aa00', // Green
-		33: '#aa6500', // Yellow
-		34: '#0000aa', // Blue
-		35: '#aa00aa', // Magenta
-		36: '#00aaaa', // Cyan
-		37: '#aaaaaa', // White
-		90: '#656565', // Bright Black
-		91: '#ff6565', // Bright Red
-		92: '#65ff65', // Bright Green
-		93: '#ffff65', // Bright Yellow
-		94: '#6565ff', // Bright Blue
-		95: '#ff65ff', // Bright Magenta
-		96: '#65ffff', // Bright Cyan
-		97: '#ffffff', // Bright White
-	})
 	function resetState(state) {
 		var out = state.closeTags.join(' ')
 		state.bold = false
@@ -115,7 +115,7 @@ PlasmoidItem {
 				// 30 => 90
 				n += 60
 			}
-			var hexColor = ansiColors[n]
+			var hexColor = config.ansiColors[n]
 			state.closeTags.push('</font>')
 			return '<font color="' + hexColor + '">'
 		} else {
@@ -148,10 +148,10 @@ PlasmoidItem {
 			var n = parseInt(tokens[++i], 10)
 			if (0 <= n && n <= 7) { // Normal
 				var u = n + 30
-				return ansiColors[u]
+				return config.ansiColors[u]
 			} else if (8 <= n && n <= 15) { // Bright
 				var u = n - 8 + 90
-				return ansiColors[u]
+				return config.ansiColors[u]
 			} else if (16 <= n && n <= 231) { // 212
 				var u = n - 16
 				var r = Math.floor(((u / 36) % 6) != 0 ? (40 * ((u / 36) % 6) + 55) : 0)
