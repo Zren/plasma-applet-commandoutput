@@ -8,17 +8,13 @@ import "../libconfig" as LibConfig
 
 LibConfig.FormKCM {
 
-	property alias cfg_command: command.text
-	property alias cfg_interval: interval.value
-	property alias cfg_waitForCompletion: waitForCompletion.checked
-
 	//-------------------------------------------------------
 	LibConfig.Heading {
 		text: i18n("Command")
 	}
 	LibConfig.TextField {
 		id: command
-		// configKey: 'command'
+		configKey: 'command'
 		Kirigami.FormData.isSection: true
 		Layout.fillWidth: true
 		Layout.preferredWidth: 240 * Screen.devicePixelRatio // + ~180px from label column
@@ -34,7 +30,7 @@ LibConfig.FormKCM {
 	LibConfig.CheckBox {
 		id: waitForCompletion
 		Kirigami.FormData.label: i18n("Wait for completion")
-		// configKey: 'waitForCompletion'
+		configKey: 'waitForCompletion'
 		text: i18n("Enabled")
 	}
 

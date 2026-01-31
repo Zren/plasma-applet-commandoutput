@@ -69,6 +69,12 @@
 		<entry name="mousewheelDownCommand" type="string">
 			<default></default>
 		</entry>
+		<entry name="runCommandAfterAction" type="bool">
+			<default>false</default>
+		</entry>
+		<entry name="actionCompletionTimeout" type="int">
+			<default>500</default>
+		</entry>
 		<entry name="useFixedWidth" type="bool">
 			<default>false</default>
 		</entry>
