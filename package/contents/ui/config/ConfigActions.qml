@@ -80,4 +80,35 @@ LibConfig.FormKCM {
 			wrapMode: LibConfig.TextField.Wrap
 		}
 	}
+
+
+	//-------------------------------------------------------
+	LibConfig.Heading {
+		text: i18n("Update")
+		label.horizontalAlignment: Text.AlignHCenter
+	}
+	ColumnLayout {
+		Kirigami.FormData.isSection: true
+		Layout.preferredWidth: 360 * Screen.devicePixelRatio
+		spacing: 0
+
+		LibConfig.CheckBox {
+			text: i18n("Run main command after action")
+			configKey: 'runCommandAfterAction'
+		}
+
+		RowLayout {
+			visible: plasmoid.configuration.runCommandAfterAction
+			QQC2.Label {
+				text: i18n("Wait time:")
+			}
+			LibConfig.SpinBox {
+				configKey: 'actionCompletionTimeout'
+				suffix: i18n("ms")
+				from: 0
+				to: 60000
+				stepSize: 100
+			}
+		}
+	}
 }

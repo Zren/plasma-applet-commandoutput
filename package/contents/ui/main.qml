@@ -97,7 +97,7 @@ PlasmoidItem {
 		97: '#ffffff', // Bright White
 	})
 	function resetState(state) {
-		var out = state.closeTags.join(' ')
+		var out = state.closeTags.reverse().join('')
 		state.bold = false
 		state.closeTags = []
 		return out
@@ -136,34 +136,38 @@ PlasmoidItem {
 		return '#' + formatHexInt(r) + formatHexInt(g) + formatHexInt(b)
 	}
 	function parseColorMode(i, tokens) {
-		var colorMode = parseInt(tokens[++i], 10)
+		var colorMode = parseInt(tokens[i+1], 10)
+		var consumed = 1
+		var hexColor = null
 		if (colorMode == 2) { // RGB
-			var r = parseInt(tokens[++i], 10)
-			var g = parseInt(tokens[++i], 10)
-			var b = parseInt(tokens[++i], 10)
-			return rgbToHex(r, g, b)
+			var r = parseInt(tokens[i+2], 10)
+			var g = parseInt(tokens[i+3], 10)
+			var b = parseInt(tokens[i+4], 10)
+			hexColor = rgbToHex(r, g, b)
+			consumed = 4
 		} else if (colorMode == 5) { // Preset of 256 colors
 			// Logic taken from Konsole
 			// https://invent.kde.org/utilities/konsole/-/blob/master/src/autotests/CharacterColorTest.cpp#L159
-			var n = parseInt(tokens[++i], 10)
+			var n = parseInt(tokens[i+2], 10)
+			consumed = 2
 			if (0 <= n && n <= 7) { // Normal
 				var u = n + 30
-				return ansiColors[u]
+				hexColor = ansiColors[u]
 			} else if (8 <= n && n <= 15) { // Bright
 				var u = n - 8 + 90
-				return ansiColors[u]
+				hexColor = ansiColors[u]
 			} else if (16 <= n && n <= 231) { // 212
 				var u = n - 16
 				var r = Math.floor(((u / 36) % 6) != 0 ? (40 * ((u / 36) % 6) + 55) : 0)
 				var g = Math.floor(((u / 6) % 6) != 0 ? (40 * ((u / 6) % 6) + 55) : 0)
 				var b = Math.floor(((u / 1) % 6) != 0 ? (40 * ((u / 1) % 6) + 55) : 0)
-				return rgbToHex(r, g, b)
+				hexColor = rgbToHex(r, g, b)
 			} else if (232 <= n && n <= 255) {
 				var gray = Math.floor((n - 232) * 10 + 8)
-				return rgbToHex(gray, gray, gray)
+				hexColor = rgbToHex(gray, gray, gray)
 			}
 		}
-		return null
+		return { hex: hexColor, consumed: consumed }
 	}
 	function parseAnsiEscape(codes, state) {
 		var tokens = codes.split(';')
@@ -174,14 +178,16 @@ PlasmoidItem {
 		for (var i = 0; i < tokens.length; i++) {
 			var token = tokens[i]
 			if (token == 38) { // Set FG
-				var hexColor = parseColorMode(i, tokens)
-				if (hexColor) {
+				var res = parseColorMode(i, tokens)
+				i += res.consumed
+				if (res.hex) {
 					state.closeTags.push('</font>')
-					out += '<font color="' + hexColor + '">'
+					out += '<font color="' + res.hex + '">'
 				}
 			} else if (token == 48) { // Set BG
-				var hexColor = parseColorMode(i, tokens)
-				// Ignore
+				var res = parseColorMode(i, tokens)
+				i += res.consumed
+				// Ignore BG
 			} else {
 				out += parseAnsiCode(token, i, tokens, state)
 			}
@@ -193,7 +199,7 @@ PlasmoidItem {
 	property string tooltipText: ''
 
 	function formatOutputText(stdout) {
-		var formattedText = stdout
+		var formattedText = '' + stdout
 
 		// Newlines
 		if (plasmoid.configuration.replaceAllNewlines) {
@@ -244,6 +250,21 @@ PlasmoidItem {
 					timer.restart()
 				}
 			}
+
+			if (plasmoid.configuration.runCommandAfterAction) {
+				var isAction = false
+				if (plasmoid.configuration.clickCommand && cmd == plasmoid.configuration.clickCommand) isAction = true
+				else if (plasmoid.configuration.mousewheelUpCommand && cmd == plasmoid.configuration.mousewheelUpCommand) isAction = true
+				else if (plasmoid.configuration.mousewheelDownCommand && cmd == plasmoid.configuration.mousewheelDownCommand) isAction = true
+
+				if (isAction) {
+					if (plasmoid.configuration.actionCompletionTimeout > 0) {
+						actionTimer.restart()
+					} else {
+						widget.runCommand()
+					}
+				}
+			}
 		}
 	}
 
@@ -251,6 +272,13 @@ PlasmoidItem {
 		// console.log('[commandoutput]', Date.now(), 'runCommand', config.command)
 		executable.exec(config.command)
 		executable.exec(config.tooltipCommand)
+	}
+
+	Timer {
+		id: actionTimer
+		interval: plasmoid.configuration.actionCompletionTimeout
+		repeat: false
+		onTriggered: widget.runCommand()
 	}
 
 	Timer {
