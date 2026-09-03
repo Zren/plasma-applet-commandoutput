@@ -137,12 +137,3 @@ msgstr "Activé"
 msgctxt "Use default font"
 msgid "Default"
 msgstr "Par défaut"
-
-#~ msgid "<b>Version:</b> %1"
-#~ msgstr "<b>Version :</b> %1"
-
-#~ msgid "Desktop Widget: Show background"
-#~ msgstr "Pour le widget de bureau : afficher un fond"
-
-#~ msgid "General"
-#~ msgstr "Général"
