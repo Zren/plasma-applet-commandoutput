@@ -285,7 +285,7 @@ PlasmoidItem {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentWidth)
 			} else if (isHorizontal && plasmoid.configuration.useFixedWidth) {
-				return plasmoid.configuration.fixedWidth * Kirigami.Units.devicePixelRatio
+				return plasmoid.configuration.fixedWidth
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitWidth)
 			}
@@ -300,7 +300,7 @@ PlasmoidItem {
 			if (isOnDesktop) {
 				return Math.ceil(output.contentHeight)
 			} else if (isVertical && plasmoid.configuration.useFixedHeight) {
-				return plasmoid.configuration.fixedHeight * Kirigami.Units.devicePixelRatio
+				return plasmoid.configuration.fixedHeight
 			} else { // isHorizontal || isVertical
 				return Math.ceil(output.implicitHeight)
 			}
