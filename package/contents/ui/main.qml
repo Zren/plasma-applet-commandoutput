@@ -102,7 +102,7 @@ PlasmoidItem {
 		state.closeTags = []
 		return out
 	}
-	function parseAnsiCode(n, i, tokens, state) {
+	function parseAnsiCode(n, iref, tokens, state) {
 		if (n == 0) { // Reset
 			return resetState(state)
 		} else if (n == 1) {
@@ -135,17 +135,17 @@ PlasmoidItem {
 	function rgbToHex(r, g, b) {
 		return '#' + formatHexInt(r) + formatHexInt(g) + formatHexInt(b)
 	}
-	function parseColorMode(i, tokens) {
-		var colorMode = parseInt(tokens[++i], 10)
+	function parseColorMode(iref, tokens) {
+		var colorMode = parseInt(tokens[++iref.value], 10)
 		if (colorMode == 2) { // RGB
-			var r = parseInt(tokens[++i], 10)
-			var g = parseInt(tokens[++i], 10)
-			var b = parseInt(tokens[++i], 10)
+			var r = parseInt(tokens[++iref.value], 10)
+			var g = parseInt(tokens[++iref.value], 10)
+			var b = parseInt(tokens[++iref.value], 10)
 			return rgbToHex(r, g, b)
 		} else if (colorMode == 5) { // Preset of 256 colors
 			// Logic taken from Konsole
 			// https://invent.kde.org/utilities/konsole/-/blob/master/src/autotests/CharacterColorTest.cpp#L159
-			var n = parseInt(tokens[++i], 10)
+			var n = parseInt(tokens[++iref.value], 10)
 			if (0 <= n && n <= 7) { // Normal
 				var u = n + 30
 				return ansiColors[u]
@@ -171,19 +171,20 @@ PlasmoidItem {
 		for (var i = 0; i < tokens.length; i++) {
 			tokens[i] = parseInt(tokens[i], 10)
 		}
-		for (var i = 0; i < tokens.length; i++) {
-			var token = tokens[i]
+		for (var iref = { value: 0 }; iref.value < tokens.length;
+		     iref.value++) {
+			var token = tokens[iref.value]
 			if (token == 38) { // Set FG
-				var hexColor = parseColorMode(i, tokens)
+				var hexColor = parseColorMode(iref, tokens)
 				if (hexColor) {
 					state.closeTags.push('</font>')
 					out += '<font color="' + hexColor + '">'
 				}
 			} else if (token == 48) { // Set BG
-				var hexColor = parseColorMode(i, tokens)
+				var hexColor = parseColorMode(iref, tokens)
 				// Ignore
 			} else {
-				out += parseAnsiCode(token, i, tokens, state)
+				out += parseAnsiCode(token, iref, tokens, state)
 			}
 		}
 		return out
